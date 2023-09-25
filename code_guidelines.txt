@@ -1,0 +1,20 @@
+Los archivos se nombran con snake_case.
+    Ej: code_guidelines.txt, mi_clase.py
+
+Las clases se nombran con PascalCase. El nombre de la clase debe corresponder con el nombre del archivo que contiene la clase.
+    Ej: MiClase, MainWindow
+
+Los métodos se nombran con snake_case. La primer linea del método debe tener una breve descripción de su uso.
+    Ej:
+    def guarda_archivo(self):
+        """Permite reescribir un archivo que fue modificado para guardar los cambios efectuados"""
+        ...
+
+En los métodos especificar el tipo de dato que devuelve.
+    Ej: def get_nombre(self) -> str:
+
+En los constructores de un método se debe identificar el tipo de dato que debe ingresarse.
+    Ej def __init__(self, nombre: str, edad: int):
+
+las variables se nombran con snake_case.
+    Ej: nombre_usuario, mensaje_generico
