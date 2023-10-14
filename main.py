@@ -1,0 +1,3 @@
+from Controlador.ControladorJefe.ControladorSeccionEmpleado import ControladorSeccionEmpleado
+
+ControladorSeccionEmpleado("Vista/VistaJefe/style.qss") 
