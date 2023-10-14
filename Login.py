@@ -15,9 +15,9 @@ class Login (QWidget):
         # self.setGeometry(500,100,350,400)
         self.setFixedSize(350,600)
         self.setWindowTitle(self.title) 
-        self.setWindowIcon(QIcon("TP FINAL/logo_TPFINAL.png"))
+        self.setWindowIcon(QIcon("logo_TPFINAL.png"))
         label = QLabel(self)
-        pixmap = QPixmap('TP FINAL/logo_TPFINAL.png')
+        pixmap = QPixmap('logo_TPFINAL.png')
         label.setPixmap(pixmap)
         self.resize(pixmap.width(),pixmap.height())
         # self.setStyleSheet("background-color:#ffffffff")
@@ -102,6 +102,6 @@ class Login (QWidget):
         
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    app.setStyleSheet(Path('TP FINAL/estilos.qss').read_text())
+    app.setStyleSheet(Path('estilos.qss').read_text())
     login = Login()
     sys.exit(app.exec())
