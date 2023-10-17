@@ -32,3 +32,4 @@ class DataBase(metaclass=DataBaseMeta):
         cursor = self.conexion.cursor()
         cursor.execute(query)
         return cursor.conexion.commit()
+    
