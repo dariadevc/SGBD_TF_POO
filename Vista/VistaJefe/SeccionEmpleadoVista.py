@@ -86,7 +86,6 @@ class SeccionEmpleadoVista (QMainWindow):
 
     info_tabla = []
 
-
     def __init__(self):
         super().__init__()
 
@@ -154,7 +153,6 @@ class SeccionEmpleadoVista (QMainWindow):
         acciones_usuario_layout.addWidget(acciones_botones_widget)
         acciones_usuario_layout.addWidget(tabla_datos)
 
-
         encabezado_layout = EncabezadoVistaJefe() #construye el encabezado
 
         #layout principal - del widget principal
@@ -162,6 +160,7 @@ class SeccionEmpleadoVista (QMainWindow):
         layout_principal.addLayout(encabezado_layout)
         layout_principal.addLayout(barra_busqueda_layout)
         layout_principal.addLayout(acciones_usuario_layout)
+
 
         widget_principal.setLayout(layout_principal)
 
@@ -172,5 +171,3 @@ class SeccionEmpleadoVista (QMainWindow):
     @classmethod
     def set_tabla_datos (cls, datos):
         cls.info_tabla.extend(datos)
-
-        
