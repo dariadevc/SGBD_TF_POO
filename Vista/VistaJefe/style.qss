@@ -12,7 +12,8 @@ QWidget#contenedor_botones_nav{
 
 QPushButton#boton-nav{
     padding: 30px;
-    background-color: #5c5958;
+    /*background-color: #5c5958;*/
+    background-color: #f48221;
     color: #ffffff;
     font-size: 15px;
 }
@@ -23,6 +24,13 @@ QPushButton#boton-nav:hover{
 
 QPushButton#boton-nav:pressed{
     background-color:#1c6ea3;
+}
+
+QPushButton#boton-nav-presionado{
+    padding: 30px;
+    background-color: #d43fb1;
+    color: #ffffff;
+    font-size: 15px;
 }
 
 QLineEdit {
