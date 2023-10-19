@@ -1,6 +1,5 @@
 from __future__ import annotations
-import sys
-from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QTableWidget, QTableWidgetItem, QLineEdit, QHeaderView
+from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QTableWidget, QTableWidgetItem, QLineEdit, QHeaderView
 from PyQt6.QtGui import QPixmap, QIcon
 from PyQt6.QtCore import Qt
 
