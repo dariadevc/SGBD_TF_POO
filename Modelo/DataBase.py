@@ -1,5 +1,5 @@
 import psycopg2
-from passw import clave
+
 
 class DataBaseMeta(type):
     __instances = None
@@ -14,7 +14,7 @@ class DataBaseMeta(type):
 class DataBase(metaclass=DataBaseMeta):
     def __init__(self):
         try:
-            self.conexion = psycopg2.connect(host="localhost", port="5432", database = "db_refugio", user= "postgres", password= clave)
+            self.conexion = psycopg2.connect(host="localhost", port="5432", database = "BD_TF", user= "postgres", password= "Nicokpo123")
             print('¡Conexion exitosa!')
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
@@ -32,5 +32,5 @@ class DataBase(metaclass=DataBaseMeta):
     def query(self, query):
         cursor = self.conexion.cursor()
         cursor.execute(query)
-        return cursor.conexion.commit()
+        return cursor.connection.commit()
     

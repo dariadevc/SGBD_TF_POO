@@ -19,3 +19,6 @@ class ControladorSeccionEmpleado:
 
     def obtener_empleados(self):
         SeccionEmpleadoVista.set_tabla_datos(self.__base.getAll("SELECT * FROM empleado"))
+        
+    
+
