@@ -11,7 +11,7 @@ import sys
 
 if  __name__ == '__main__':
     app = QApplication(sys.argv)
-    controlador = ControladorLogin("Vista/VistaLogin/estilos.qss")
+    controlador = ControladorLogin("Vista\VistaLogin\estilos.qss")
     # if controlador.login():
     #     controlador.mostrar_ventana_seccion_empleado()
     app.exec()
