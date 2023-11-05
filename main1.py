@@ -4,14 +4,19 @@ from Controlador.ControladorJefe.ControladorSeccionAnimales import ControladorSe
 from PyQt6.QtWidgets import QApplication
 import sys
 
-# ControladorSeccionEmpleado("Vista/VistaJefe/style.qss")
-# ControladorSeccionAnimales("Vista/VistaJefe/style.qss")
-# ControladorLogin("Vista/VistaLogin/estilos.qss")
-
+# ControladorSeccionEmpleado("C:/Users/LENOVO/Desktop/SGBD_TF_POO-vj_se_ver1/Vista/VistaJefe/style.qss")
+# ControladorSeccionAnimales("C:/Users/Nico/Desktop/TP FINAL/SGBD_TF_POO-vj_se_ver1/Vista/VistaJefe/style.qss")
 
 if  __name__ == '__main__':
     app = QApplication(sys.argv)
-    controlador = ControladorLogin("Vista/VistaLogin/estilos.qss")
-    # if controlador.login():
-    #     controlador.mostrar_ventana_seccion_empleado()
+    controlador = ControladorSeccionEmpleado("Vista\VistaJefe\style.qss")
     app.exec()
+
+
+
+# app = QApplication(sys.argv)
+
+# MiLogin = login()
+
+# sys.exit(app.exec())  
+    
