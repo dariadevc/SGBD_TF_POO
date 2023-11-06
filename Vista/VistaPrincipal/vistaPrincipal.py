@@ -1,6 +1,4 @@
-
-
-class VistaPrincipal():
+class VistaPrincipal:
     def __init__(self):
         self.secciones = []
 
@@ -8,4 +6,5 @@ class VistaPrincipal():
         self.secciones.append(seccion)
 
     def ejecutar_vista(self):
+        pass
         # Agregar código para ejecutar ventana
