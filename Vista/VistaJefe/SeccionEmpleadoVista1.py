@@ -1,5 +1,5 @@
 from __future__ import annotations
-from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QTableWidget, QTableWidgetItem, QLineEdit, QHeaderView, QMessageBox
+from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QTableWidget, QTableWidgetItem, QLineEdit, QHeaderView, QMessageBox, QDialog
 from PyQt6.QtGui import QPixmap, QIcon
 from PyQt6.QtCore import Qt
 
@@ -110,12 +110,12 @@ class SeccionEmpleadoVista (QMainWindow):
         acciones_botones_layout = QVBoxLayout()
 
             #acciones_botones_layout | botones 
-        agregar_e = BotonAccionTabla("   Agregar\n   empleado","Vista/Media/user-plus-svgrepo-com.png")
-        modificar_e = BotonAccionTabla(" Modificar\n empleado","Vista/Media/user-pen-svgrepo-com.png")
-        eliminar_e = BotonAccionTabla("  Eliminar\n  empleado","Vista/Media/user-xmark-svgrepo-com.png")
+        self.agregar_e = BotonAccionTabla("   Agregar\n   empleado","Vista/Media/user-plus-svgrepo-com.png")
+        self.modificar_e = BotonAccionTabla(" Modificar\n empleado","Vista/Media/user-pen-svgrepo-com.png")
+        self.eliminar_e = BotonAccionTabla("  Eliminar\n  empleado","Vista/Media/user-xmark-svgrepo-com.png")
 
         #acciones_tabla_layout - composición
-        self.componer_layout(acciones_botones_layout, [agregar_e, modificar_e, eliminar_e])
+        self.componer_layout(acciones_botones_layout, [self.agregar_e, self.modificar_e, self.eliminar_e])
 
         acciones_botones_widget = QWidget()
         acciones_botones_widget.setLayout(acciones_botones_layout)
@@ -199,3 +199,28 @@ class SeccionEmpleadoVista (QMainWindow):
     def get_input_busqueda (self):
         return self.input_busqueda
     
+    def get_boton_agregar (self):
+        return self.agregar_e
+    
+    def get_boton_eliminar (self):
+        return self.eliminar_e
+    
+    def get_boton_modificar (self):
+        return self.modificar_e
+    
+    def mostrar_ventana_eliminar_empleado(self):
+        dialogo_eliminar = QDialog(self)
+        dialogo_eliminar.setWindowTitle("Eliminar Empleado")
+
+        layout = QVBoxLayout()
+
+        dni_label = QLabel("DNI del empleado a eliminar:")
+        self.dni_input = QLineEdit()
+        eliminar_button = QPushButton("Eliminar")
+
+        layout.addWidget(dni_label)
+        layout.addWidget(self.dni_input)
+        layout.addWidget(eliminar_button)
+
+        dialogo_eliminar.setLayout(layout)
+        dialogo_eliminar.exec()

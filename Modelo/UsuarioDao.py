@@ -12,7 +12,7 @@ class UsuarioDao:
     #     return self.base.get("SELECT * FROM Usuarios WHERE id = {}".format(id))
     
     def login(self, usuario, contrasenia):
-        return self.base.get("SELECT * FROM public.usuarios as d WHERE nombre_usuario = '{}' and contrasenia  = '{}'".format(usuario, contrasenia))
+        return self.base.get("SELECT * FROM public.usuario as d WHERE nombre_usuario = '{}' and contrasenia_usuario  = '{}'".format(usuario, contrasenia))
     
     # def insert(self):
     #     pass
