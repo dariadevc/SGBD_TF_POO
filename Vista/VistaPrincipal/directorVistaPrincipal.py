@@ -1,7 +1,7 @@
 from builderVistaPrincipal import BuilderVistaPrincipal
 
 
-class Director:
+class DirectorVistaPrincipal:
     def __init__(self) -> None:
         self._builder = None
 

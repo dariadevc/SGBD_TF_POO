@@ -4,16 +4,20 @@ from abc import ABC, abstractmethod
 class BuilderVistaPrincipal(ABC):
     @property
     @abstractmethod
-    def vista(self) -> None:
+    def vista_principal(self) -> None:
         pass
 
-    @vista.setter
+    @vista_principal.setter
     @abstractmethod
-    def vista(self) -> None:
+    def vista_principal(self) -> None:
         pass
 
     @abstractmethod
     def produce_encabezado(self) -> None:
+        pass
+
+    @abstractmethod
+    def produce_botones(self) -> None:
         pass
 
     @abstractmethod
