@@ -1,5 +1,12 @@
+import sys 
+sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista')
+sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\Clases')
+sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\vista_secciones')
+sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\VistaPrincipal')
 from builderVistaPrincipal import BuilderVistaPrincipal
 from vistaPrincipal import VistaPrincipal
+from Vista.Clases.encabezado import EncabezadoVista
+from vista_secciones.SeccionAnimalesVista import SeccionAnimalesVista
 
 
 class ConcreteBuilderVistaPrincipal(BuilderVistaPrincipal):
@@ -16,13 +23,15 @@ class ConcreteBuilderVistaPrincipal(BuilderVistaPrincipal):
         return vista_principal
 
     def produce_encabezado(self) -> None:
-        pass
+        encabezado = EncabezadoVista()
+        self._vista_principal.agregar_seccion(encabezado)
 
     def produce_seccion_empleado(self) -> None:
         pass
 
     def produce_seccion_animales(self) -> None:
-        pass
+        vista_animales = SeccionAnimalesVista()
+        self._vista_principal.agregar_seccion(vista_animales)
 
     def produce_seccion_adoptantes(self) -> None:
         pass
