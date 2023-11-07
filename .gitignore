@@ -8,6 +8,9 @@ passw.py
 # C extensions
 *.so
 
+trabajo_poo/
+.idea/
+
 # Distribution / packaging
 .Python
 build/
