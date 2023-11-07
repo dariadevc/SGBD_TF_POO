@@ -1,8 +1,3 @@
-import sys 
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\Clases')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\vista_secciones')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\VistaPrincipal')
 from builderVistaPrincipal import BuilderVistaPrincipal
 from vistaPrincipal import VistaPrincipal
 from Vista.Clases.encabezado import EncabezadoVista

@@ -1,20 +1,6 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QHeaderView, QTableWidget, QTableWidgetItem, QVBoxLayout, QLineEdit, QPushButton, QWidget
+from PyQt6.QtWidgets import QHeaderView, QTableWidget, QTableWidgetItem
 from PyQt6.QtCore import Qt
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\Clases')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\vista_secciones')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\VistaPrincipal')
-
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Controlador')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Controlador\\ControladorJefe')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Controlador\\ControladorJefe\\ControladorSeccionAnimales.py')
-
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Modelo')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Modelo\\tabla')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Modelo\\Animal')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Modelo\\AnimalDao')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Modelo\\DataBase')
 
 class Tabla(QTableWidget):
 
@@ -24,7 +10,8 @@ class Tabla(QTableWidget):
 
         nuevos_datos = nuevos_datos
 
-        self.rowCount(len(nuevos_datos))
+        # self.rowCount(len(nuevos_datos))
+        self.setRowCount(len(nuevos_datos))
         self.setColumnCount(len(nuevos_datos[0]))
         self.verticalHeader().setVisible(False)
 
@@ -47,4 +34,7 @@ class Tabla(QTableWidget):
             self.setItem(posicion_fila, posicion_columna, celda)
 
 
+    @property
+    def info_tabla(self):
+        return self
         

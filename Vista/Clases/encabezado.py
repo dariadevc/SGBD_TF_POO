@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt
-from botones import BotonNavegador
+from Vista.Clases.botones import BotonNavegador
 
 class EncabezadoVista (QVBoxLayout): #encabezado común para todas las vistas de VistaJefe
     
@@ -13,7 +13,7 @@ class EncabezadoVista (QVBoxLayout): #encabezado común para todas las vistas de
         barra_nav_layout = QHBoxLayout()
 
         #banner | logo 
-        logo = QPixmap("Vista/Media/logo-bsf.png")
+        logo = QPixmap("C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/logo-bsf.png")
         logo = logo.scaled(43,32)
         logo_refugio_label = QLabel()
         logo_refugio_label.setPixmap(logo)
@@ -28,7 +28,7 @@ class EncabezadoVista (QVBoxLayout): #encabezado común para todas las vistas de
         tipo_usuario_label = QLabel("Usuario\nJefe")
         tipo_usuario_label.setAlignment(Qt.AlignmentFlag.AlignCenter) #centra el texto
 
-        ruedita_png = QPixmap("Vista/Media/configuration-wheel-svgrepo-com.png")
+        ruedita_png = QPixmap("C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/configuration-wheel-svgrepo-com.png")
         ruedita_png = ruedita_png.scaled(30,30)
         boton_opciones_usuario = QLabel()
         boton_opciones_usuario.setPixmap(ruedita_png)
@@ -46,11 +46,11 @@ class EncabezadoVista (QVBoxLayout): #encabezado común para todas las vistas de
 
         #barra_nav | botones
         # boton_seccion_empleado = BotonNavegador("Empleados", "Vista/Media/icon-empleado.png")
-        self.boton_seccion_animales = BotonNavegador("Animales", "Vista/Media/icon-animales.png")
-        self.boton_seccion_adopcion = BotonNavegador("Adopciones", "Vista/Media/icon-adopciones-2.png")
-        self.boton_seccion_adoptantes = BotonNavegador("Adoptantes", "Vista/Media/icon-adoptantes.png")
-        self.boton_seccion_visitas = BotonNavegador("Visitas", "Vista/Media/icon-citas.png")
-        self.boton_seccion_visitantes = BotonNavegador("Visitantes", "Vista/Media/icon-visitantes.png")
+        self.boton_seccion_animales = BotonNavegador("Animales", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/icon-animales.png")
+        self.boton_seccion_adopcion = BotonNavegador("Adopciones", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/icon-adopciones-2.png")
+        self.boton_seccion_adoptantes = BotonNavegador("Adoptantes", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/icon-adoptantes.png")
+        self.boton_seccion_visitas = BotonNavegador("Visitas", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/icon-citas.png")
+        self.boton_seccion_visitantes = BotonNavegador("Visitantes", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/icon-visitantes.png")
 
         #barra_nav - composición
         self.componer_layout(barra_nav_layout, [self.boton_seccion_animales, self.boton_seccion_adopcion, self.boton_seccion_adoptantes, self.boton_seccion_visitas, self.boton_seccion_visitantes])

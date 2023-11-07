@@ -1,35 +1,17 @@
-import sys
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\Clases')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\vista_secciones')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\vista_secciones\\SeccionAnimalesVista')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\VistaPrincipal')
-
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Controlador')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Controlador\\ControladorJefe')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Controlador\\ControladorJefe\\ControladorSeccionAnimales.py')
-
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Modelo')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Modelo\\tabla')
-
-
-
-from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QLineEdit, QDialog
-from PyQt6.QtWidgets import QMainWindow
-# from Vista.VistaJefe.SeccionAnimalesVista import SeccionAnimalesVista
-# from Modelo.DataBase import DataBase
-
-
+from PyQt6.QtWidgets import QVBoxLayout, QLabel, QPushButton, QLineEdit, QDialog
 from Vista.vista_secciones.SeccionAnimalesVista import SeccionAnimalesVista
-
+from Modelo.DataBase import DataBase
 
 class ControladorSeccionAnimales:
 
     def __init__(self):
-        # self.__base = DataBase()
-        self.obtener_animales()
+        self.__base = DataBase()
+        # self.obtener_animales()
         self.__window = SeccionAnimalesVista()
+        self.__window.tabla_datos.actualizar_tabla(self.obtener_datos())
         self.__window.get_boton_modif_empleado().clicked.connect(self.mostrar_ventana_modificar_empleado)
+        self.__window.get_input_busqueda().editingFinished.connect(self.buscar_animal)
+        self.__window.get_input_busqueda().textChanged.connect(self.buscar_animal)
 
 
     @property
@@ -52,4 +34,12 @@ class ControladorSeccionAnimales:
         self.dialogo_eliminar.setLayout(layout)
         self.dialogo_eliminar.exec()
 
+    def obtener_datos(self):
+        datos = self.__base.getAll("SELECT tipo_animal, nombre_animal, sexo_animal, etapa_vida_animal FROM public.\"ANIMAL\"")
+        print((datos))
+        return datos
 
+    def buscar_animal(self):
+        datos = self.__base.getAll("SELECT tipo_animal, nombre_animal, sexo_animal, etapa_vida_animal FROM public.\"ANIMAL\" WHERE tipo_animal = '{}'".format(self.__window.obtener_animal_buscado()))
+        print((datos))
+        return datos

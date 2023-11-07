@@ -2,11 +2,6 @@ from __future__ import annotations
 from PyQt6.QtWidgets import QMessageBox, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QTableWidget, QTableWidgetItem, QLineEdit, QHeaderView
 from PyQt6.QtGui import QPixmap, QIcon
 from PyQt6.QtCore import Qt
-import sys 
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\Clases')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\vista_secciones')
-sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\VistaPrincipal')
 from Clases.botones import BotonAccionTabla
 
 
