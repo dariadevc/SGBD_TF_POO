@@ -1,3 +1,8 @@
+import sys 
+sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista')
+sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\Clases')
+sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\vista_secciones')
+sys.path.append(r'C:\\Users\\Fiore\\Downloads\\prueba_build\\Vista\\VistaPrincipal')
 from builderVistaPrincipal import BuilderVistaPrincipal
 
 
@@ -36,7 +41,8 @@ class DirectorVistaPrincipal:
     def build_vista_empleado(self) -> None:
         self.builder.produce_encabezado()
         self.builder.produce_seccion_animales()
-        self.builder.produce_seccion_adopcion()
-        self.builder.produce_seccion_adoptantes()
-        self.builder.produce_seccion_visitas_juego()
-        self.builder.produce_seccion_visitantes()
+        # self.builder.produce_seccion_adopcion()
+        # self.builder.produce_seccion_adoptantes()
+        # self.builder.produce_seccion_visitas_juego()
+        # self.builder.produce_seccion_visitantes()
+        
