@@ -3,7 +3,6 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLab
 from PyQt6.QtGui import QPixmap, QIcon
 from PyQt6.QtCore import Qt
 
-
 class BotonNavegador (QPushButton):
     def __init__(self, text: str, icon: str):
         super().__init__()
