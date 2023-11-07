@@ -2,7 +2,7 @@ from Modelo.Personas.Persona import Persona
 from Modelo.UsuarioDao import UsuarioDao
 
 
-class Empleado(Persona):
+class Usuario(Persona):
     def __init__(self):
         super().__init__()
         self.__tipo_usuario = ""
