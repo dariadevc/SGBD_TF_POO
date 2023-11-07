@@ -16,9 +16,9 @@ class BuilderVistaPrincipal(ABC):
     def produce_encabezado(self) -> None:
         pass
 
-    @abstractmethod
-    def produce_botones(self) -> None:
-        pass
+    # @abstractmethod
+    # def produce_botones(self) -> None:
+    #     pass
 
     @abstractmethod
     def produce_seccion_empleado(self) -> None:
