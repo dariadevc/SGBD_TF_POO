@@ -1,11 +1,11 @@
 import sys
 from PyQt6.QtCore import QObject, pyqtSignal
 from PyQt6.QtWidgets import QApplication, QMessageBox
-from Vista.VistaLogin.LoginView1 import Login
+from Vista.VistaLogin.vista_login import VistaLogin
 
 # from Modelo.DataBase import DataBase
 from Modelo.Usuario import Usuario
-from Controlador.ControladorJefe.ControladorSeccionEmpleado import (
+from Controlador.ControladorJefe.controlador_seccion_empleado import (
     ControladorSeccionEmpleado,
 )
 
@@ -13,7 +13,7 @@ from Controlador.ControladorJefe.ControladorSeccionEmpleado import (
 class ControladorLogin:
     def __init__(self, estilo):
         # self.app = QApplication(sys.argv)
-        self.__window = Login()
+        self.__window = VistaLogin()
         self.__window.setWindowTitle("Inicio de sesión")
         self.__window.show()
         self.__window.get_boton_login().clicked.connect(self.login)
@@ -32,7 +32,7 @@ class ControladorLogin:
                 # self.mostrar_ventana_seccion_empleado()
                 #     # self.app.exit()
                 self.ventanaEmpleado = ControladorSeccionEmpleado(
-                    "Vista/vista_secciones/style.qss"
+                    "Vista/vista_secciones/estilo_main.qss"
                 )
                 self.__window.close()
         else:

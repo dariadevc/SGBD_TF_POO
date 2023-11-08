@@ -1,6 +1,15 @@
 import sys
-from PyQt6.QtWidgets import QApplication
-from Vista.vista_secciones.SeccionEmpleadoVista1 import SeccionEmpleadoVista
+from PyQt6.QtWidgets import (
+    QApplication,
+    QDialog,
+    QLabel,
+    QLineEdit,
+    QVBoxLayout,
+    QCheckBox,
+    QMessageBox,
+    QPushButton,
+)
+from Vista.vista_secciones.seccion_empleado_vista import SeccionEmpleadoVista
 from Modelo.DataBase import DataBase
 
 
@@ -87,7 +96,7 @@ class ControladorSeccionEmpleado:
                         mensaje.exec()
                 else:
                     print("Error en la consulta")
-            except Exception as e:
+            except Exception:
                 print("Error en la base de datos")
         else:
             print("El campo DNI esta vacio")
@@ -163,16 +172,16 @@ class ControladorSeccionEmpleado:
         dialog.setLayout(layout)
         dialog.exec()
 
-    def mostrar_mensaje_error(mensaje):
+    def mostrar_mensaje_error(self, mensaje: str):
         msg = QMessageBox()
-        msg.setIcon(QMessageBox.Critical)
+        msg.setIcon(QMessageBox.Icon.Critical)
         msg.setText(mensaje)
         msg.setWindowTitle("Error")
         msg.exec()
 
-    def mostrar_mensaje_exito(mensaje):
+    def mostrar_mensaje_exito(self, mensaje: str):
         msg = QMessageBox()
-        msg.setIcon(QMessageBox.Information)
+        msg.setIcon(QMessageBox.Icon.Information)
         msg.setText(mensaje)
         msg.setWindowTitle("Éxito")
         msg.exec()
@@ -188,9 +197,9 @@ class ControladorSeccionEmpleado:
         cuil = self.cuil_input.text()
         permiso_adopcion = self.permiso_adopcion_checkbox.isChecked()
 
-        if tipo_usuario not in ["Administrador", "Encargado"]:
+        if tipo_usuario not in ["ENCARGADO", "EMPLEADO"]:
             self.mostrar_mensaje_error(
-                "El tipo de usuario debe ser 'Administrador' o 'Encargado'."
+                "El tipo de usuario debe ser 'ENCARGADO' o 'EMPLEADO'."
             )
         elif not dni.isdigit() or len(dni) != 8:
             self.mostrar_mensaje_error("DNI debe ser un número de 8 dígitos.")
@@ -212,19 +221,23 @@ class ControladorSeccionEmpleado:
             # Si todas las validaciones son exitosas, procede a guardar los datos en la base de datos
             try:
                 # Utiliza la conexión existente de la clase DataBase
-                consulta = "INSERT INTO public.usuario (tipo_usuario, dni_usuario, apellido_usuario, nombre_usuario, nro_cel_usuario, email_usuario, cuil_usuario, permiso_adopcion) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(
+                alias = dni
+                contrasenia = dni
+                consulta = "INSERT INTO public.usuario (tipo_usuario, dni_usuario, apellido_usuario, nombre_usuario, alias_usuario, nro_cel_usuario, email_usuario, contrasenia_usuario, cuil_usuario, permiso_adopcion) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(
                     tipo_usuario,
                     dni,
                     apellido,
                     nombre,
+                    alias,
                     nro_cel,
                     email,
+                    contrasenia,
                     cuil,
                     permiso_adopcion,
                 )
 
                 self.__base.query(consulta)
 
-                print("Datos guardados exitosamente.")
-            except Exception as e:
-                print("Error al guardar los datos")
+                self.mostrar_mensaje_exito("Datos guardados exitosamente.")
+            except Exception:
+                self.mostrar_mensaje_error("Error al guardar los datos")

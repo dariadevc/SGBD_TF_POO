@@ -2,8 +2,18 @@ import sys
 import typing
 from PyQt6 import QtCore
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QMainWindow, QApplication , QLabel , QWidget , QLineEdit , QPushButton , QMessageBox , QCheckBox, QVBoxLayout
-from PyQt6.QtGui import QFont , QPixmap, QIcon, QPainter, QColor
+from PyQt6.QtWidgets import (
+    QMainWindow,
+    QApplication,
+    QLabel,
+    QWidget,
+    QLineEdit,
+    QPushButton,
+    QMessageBox,
+    QCheckBox,
+    QVBoxLayout,
+)
+from PyQt6.QtGui import QFont, QPixmap, QIcon, QPainter, QColor
 from pathlib import Path
 
 
@@ -24,27 +34,32 @@ class RepeatedBackgroundWidget(QWidget):
                 painter.drawPixmap(x, y, self.background_image)
 
 
-class Login (QMainWindow):
+class VistaLogin(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setFixedSize(500,600)
+        self.setFixedSize(500, 600)
         # self.setWindowTitle("Inicio de sesión")
-        self.setWindowIcon(QIcon('Vista/Media/logo-bsf.png'))
+        self.setWindowIcon(QIcon("Vista/Media/logo-bsf.png"))
         fondo = RepeatedBackgroundWidget()
         self.setCentralWidget(fondo)
         self.layout().addWidget(self.generar_interfaz())
-        
-
 
     def generar_interfaz(self):
         interfaz_widget = QWidget()
-        interfaz_widget.setFixedSize(300,400)
-        interfaz_widget.setGeometry(((self.width() - interfaz_widget.width()) // 2),((self.height() - interfaz_widget.height()) // 2),interfaz_widget.width(), interfaz_widget.height())
+        interfaz_widget.setFixedSize(300, 400)
+        interfaz_widget.setGeometry(
+            ((self.width() - interfaz_widget.width()) // 2),
+            ((self.height() - interfaz_widget.height()) // 2),
+            interfaz_widget.width(),
+            interfaz_widget.height(),
+        )
         interfaz_widget.setObjectName("interfaz_widget")
         interfaz_layout = QVBoxLayout()
         logo = QLabel()
         logo.setFixedSize(90, 70)
-        logo.setPixmap(QPixmap('Vista\Media\logo-bsf.png').scaled(logo.width(),logo.height()))
+        logo.setPixmap(
+            QPixmap("Vista\Media\logo-bsf.png").scaled(logo.width(), logo.height())
+        )
         logo.setObjectName("logo")
         interfaz_layout.addWidget(logo)
         interfaz_layout.addLayout(self.generar_formulario())
@@ -54,7 +69,7 @@ class Login (QMainWindow):
 
         return interfaz_widget
 
-    def contrasenia_visible(self,clicked):
+    def contrasenia_visible(self, clicked):
         if clicked:
             self.contrasenia_input.setEchoMode(QLineEdit.EchoMode.Normal)
         else:
@@ -63,20 +78,19 @@ class Login (QMainWindow):
     # def login(self):
     #     usuario = Usuario(self.get_usuario(), self.get_contrasenia())
     #     usuario.login()
-        
-        
+
     def realizar_registro(self):
         pass
-    
-    def get_contrasenia (self):
+
+    def get_contrasenia(self):
         return self.contrasenia_input.text()
-    
+
     def get_usuario(self):
         return self.user_input.text()
-    
-    def get_boton_login (self):
+
+    def get_boton_login(self):
         return self.boton_login
-    
+
     def generar_formulario(self):
         self.si_logueo = False
         formulario_layout = QVBoxLayout()
@@ -90,7 +104,9 @@ class Login (QMainWindow):
         contrasenia_label = QLabel("Contraseña")
         self.contrasenia_input = QLineEdit()
         self.contrasenia_input.setPlaceholderText("Contraseña")
-        self.contrasenia_input.setEchoMode(QLineEdit.EchoMode.Password) #oculta el texto ingresado
+        self.contrasenia_input.setEchoMode(
+            QLineEdit.EchoMode.Password
+        )  # oculta el texto ingresado
 
         self.ver_contrasenia = QCheckBox("Ver contraseña")
         self.ver_contrasenia.toggled.connect(self.contrasenia_visible)
@@ -115,9 +131,10 @@ class Login (QMainWindow):
         formulario_layout.setAlignment(user_label, Qt.AlignmentFlag.AlignHCenter)
         formulario_layout.setAlignment(self.user_input, Qt.AlignmentFlag.AlignHCenter)
         formulario_layout.setAlignment(contrasenia_label, Qt.AlignmentFlag.AlignHCenter)
-        formulario_layout.setAlignment(self.contrasenia_input, Qt.AlignmentFlag.AlignHCenter)
+        formulario_layout.setAlignment(
+            self.contrasenia_input, Qt.AlignmentFlag.AlignHCenter
+        )
         formulario_layout.setAlignment(self.boton_login, Qt.AlignmentFlag.AlignHCenter)
         formulario_layout.setAlignment(boton_registrarse, Qt.AlignmentFlag.AlignHCenter)
 
         return formulario_layout
-    
