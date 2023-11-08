@@ -14,6 +14,7 @@ class ControladorSeccionEmpleado:
         self.__window.show()
         # empleado = self.__window.obtener_usuario_buscado()
         # self.__window.get_input_busqueda().editingFinished.connect(self.buscar_empleado)
+        
 
         self.__window.get_input_busqueda().textChanged.connect(self.buscar_empleado)
         self.__window.get_boton_eliminar().clicked.connect(self.mostrar_ventana_eliminar_empleado)
@@ -46,21 +47,10 @@ class ControladorSeccionEmpleado:
         print("Elimino empleado")
         texto_buscado = self.eliminar_button.text()
         if texto_buscado:
-            consulta = ("DELETE FROM public.usuario WHERE dni_usuario = '{}'".format(texto_buscado))
             try:
-                resultado = self.__base.query(consulta)
-                if resultado is not None:
-                    if self.__base.query("SELECT 1 FROM public.usuario WHERE dni_usuario = '{}'".format(texto_buscado,)):
-                        print("Empleado eliminado")
-                        self.dialogo_eliminar.close()
-                    else:
-                        mensaje = QMessageBox()
-                        mensaje.setIcon(QMessageBox.Icon.Warning)
-                        mensaje.setWindowTitle("Mensaje de Error")
-                        mensaje.setText("No hay ningún usuario con ese DNI")
-                        mensaje.exec()
-                else:
-                    print("Error en la consulta")
+                consulta = "DELETE FROM public.usuario WHERE dni_usuario ={}".format(texto_buscado)
+                self.__base.query(consulta)
+                self.mostrar_mensaje_exito("Usuario eliminado")
             except Exception as e:
                 print("Error en la base de datos")
         else:
@@ -135,16 +125,14 @@ class ControladorSeccionEmpleado:
         dialog.setLayout(layout)
         dialog.exec()
         
-    def mostrar_mensaje_error(mensaje):
+    def mostrar_mensaje_error(self,mensaje):
         msg = QMessageBox()
-        msg.setIcon(QMessageBox.Critical)
         msg.setText(mensaje)
         msg.setWindowTitle("Error")
         msg.exec()
     
-    def mostrar_mensaje_exito(mensaje):
+    def mostrar_mensaje_exito(self,mensaje):
         msg = QMessageBox()
-        msg.setIcon(QMessageBox.Information)
         msg.setText(mensaje)
         msg.setWindowTitle("Éxito")
         msg.exec()
@@ -176,8 +164,8 @@ class ControladorSeccionEmpleado:
         # Si todas las validaciones son exitosas, procede a guardar los datos en la base de datos
             try:
             # Utiliza la conexión existente de la clase DataBase
-                consulta = "INSERT INTO public.usuario (tipo_usuario, dni_usuario, apellido_usuario, nombre_usuario, nro_cel_usuario, email_usuario, cuil_usuario, permiso_adopcion) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(tipo_usuario,dni,apellido,nombre,nro_cel,email,cuil,permiso_adopcion)
-                
+                consulta = "INSERT INTO public.usuario (tipo_usuario, dni_usuario, apellido_usuario, nombre_usuario, nro_cel_usuario, email_usuario, cuil_usuario, permisos_adopcion,alias_usuario,contrasenia_usuario) VALUES ('{}', {}, '{}', '{}', {}, '{}', {}, {},{},{})".format(tipo_usuario,dni,apellido,nombre,nro_cel,email,cuil,permiso_adopcion,dni,dni)
+                print(consulta)
                 self.__base.query(consulta)
 
                 print("Datos guardados exitosamente.")

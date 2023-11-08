@@ -1,4 +1,4 @@
-from Modelo.Personas.Persona import Persona
+from Modelo.Personas.persona import Persona
 from Modelo.UsuarioDao import UsuarioDao
 
 
