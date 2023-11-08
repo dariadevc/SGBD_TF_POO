@@ -5,18 +5,98 @@ from PyQt6.QtWidgets import (
     QVBoxLayout,
     QHBoxLayout,
     QPushButton,
-    QTableWidget,
-    QTableWidgetItem,
+    QStackedWidget,
+    QLabel,
     QLineEdit,
-    QHeaderView,
+    QApplication,
 )
 from PyQt6.QtCore import Qt
+import sys
 from Vista.elementos.botones import BotonAccionTabla
 from Vista.elementos.tabla import Tabla
 
 
-class SeccionAdopcionVista(QWidget):
+class FormularioAdopcionVista(QWidget):
+    def __init__(self, parent_window):
+        super().__init__()
+
+        self.parent_window = parent_window
+
+        layout = QVBoxLayout()
+
+        self.dni_label = QLabel("Adoptante (DNI):")
+        self.dni_input = QLineEdit()
+
+        self.animal_label = QLabel("Animal (Código):")
+        self.animal_input = QLineEdit()
+
+        self.submit_button = QPushButton("Enviar Solicitud")
+        self.submit_button.clicked.connect(self.submit_form)
+
+        layout.addWidget(self.dni_label)
+        layout.addWidget(self.dni_input)
+        layout.addWidget(self.animal_label)
+        layout.addWidget(self.animal_input)
+        layout.addWidget(self.submit_button)
+
+        self.setLayout(layout)
+
+    def nuevo_adoptante(self):
+        super().__init()
+
+        layout = QVBoxLayout()
+
+        self.dni_label = QLabel(f"DNI del Adoptante: {dni}")
+        self.name_label = QLabel("Nombre:")
+        self.name_input = QLineEdit()
+        self.lastname_label = QLabel("Apellido:")
+        self.lastname_input = QLineEdit()
+        self.phone_label = QLabel("Número de Celular:")
+        self.phone_input = QLineEdit()
+        self.email_label = QLabel("Email:")
+        self.email_input = QLineEdit()
+        self.address_label = QLabel("Dirección:")
+        self.address_input = QLineEdit()
+
+        self.submit_button = QPushButton("Enviar Solicitud")
+        self.submit_button.clicked.connect(self.submit_form)
+
+        layout.addWidget(self.dni_label)
+        layout.addWidget(self.name_label)
+        layout.addWidget(self.name_input)
+        layout.addWidget(self.lastname_label)
+        layout.addWidget(self.lastname_input)
+        layout.addWidget(self.phone_label)
+        layout.addWidget(self.phone_input)
+        layout.addWidget(self.email_label)
+        layout.addWidget(self.email_input)
+        layout.addWidget(self.address_label)
+        layout.addWidget(self.address_input)
+        layout.addWidget(self.submit_button)
+
+        self.setLayout(layout)
+
+    def visitante_a_adoptante(self):
+        super().__init()
+
+        layout = QVBoxLayout()
+
+        self.address_label = QLabel("Dirección:")
+        self.address_input = QLineEdit()
+
+        self.submit_button = QPushButton("Enviar Solicitud")
+        self.submit_button.clicked.connect(self.submit_form)
+
+        layout.addWidget(self.address_label)
+        layout.addWidget(self.address_input)
+        layout.addWidget(self.submit_button)
+
+        self.setLayout(layout)
+
+
+class AdopcionesAntiguasVista(QWidget):
     def __init__(self):
+        super().__init__()
         # barra_busqueda | input de busqueda
         barra_busqueda_layout = QHBoxLayout()
 
@@ -87,3 +167,40 @@ class SeccionAdopcionVista(QWidget):
 
     def obtener_adopcion_buscada(self):
         return self.input_busqueda.text()
+
+
+class SeccionAdopcionVista(QWidget):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle("Ventana Principal")
+        self.setGeometry(100, 100, 400, 200)
+
+        self.central_widget = QStackedWidget()
+        self.setCentralWidget(self.central_widget)
+
+        button_widget = QWidget()
+        layout = QVBoxLayout()
+
+        boton_adopciones_antiguas = QPushButton("Acceder a \nAdopciones Antiguas")
+        boton_genera_adopcion = QPushButton("Generar \nNueva Adopción")
+
+        layout.addWidget(boton_adopciones_antiguas)
+        layout.addWidget(boton_genera_adopcion)
+
+        button_widget.setLayout(layout)
+
+        self.central_widget.addWidget(button_widget)
+
+        boton_adopciones_antiguas.clicked.connect(self.mostrar_adopciones_antiguas)
+        boton_genera_adopcion.clicked.connect(self.muestra_formulario_adopcion)
+
+    def mostrar_adopciones_antiguas(self):
+        adopciones_antiguas_ventana = AdopcionesAntiguasVista()
+        self.central_widget.addWidget(adopciones_antiguas_ventana)
+        self.central_widget.setCurrentWidget(adopciones_antiguas_ventana)
+
+    def muestra_formulario_adopcion(self):
+        formulario_adopcion = FormularioAdopcionVista(self)
+        self.central_widget.addWidget(formulario_adopcion)
+        self.central_widget.setCurrentWidget(formulario_adopcion)

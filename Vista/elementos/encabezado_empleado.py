@@ -103,3 +103,12 @@ class EncabezadoVista(
 
     def get_boton_animales(self):
         return self.boton_seccion_animales
+
+    def get_boton_adoptantes(self):
+        return self.boton_seccion_adoptantes
+
+    def get_boton_visitas(self):
+        return self.boton_seccion_visitas
+
+    def get_boton_visitantes(self):
+        return self.boton_seccion_visitantes

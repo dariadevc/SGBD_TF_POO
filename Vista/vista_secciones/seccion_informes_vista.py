@@ -15,8 +15,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtGui import QPixmap, QIcon
 from PyQt6.QtCore import Qt
-from Vista.elementos.barra_busqueda import BarraBusqueda
-from Vista.elementos.botones import BotonNavegador, BotonAccionTabla
+from Vista.elementos.botones import BotonAccionTabla
 from Vista.elementos.encabezado_encargado import EncabezadoVista
 
 
