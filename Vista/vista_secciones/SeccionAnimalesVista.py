@@ -65,11 +65,11 @@ class SeccionAnimalesVista(QWidget):
         acciones_botones_widget.setLayout(acciones_botones_layout)
         acciones_botones_widget.setObjectName("contenedor-botones-tabla")
 
-        #tabla
+        # tabla
 
         self.tabla_datos = Tabla()
 
-        #acciones_tabla_layout - composición
+        # acciones_tabla_layout - composición
         acciones_usuario_layout.addWidget(acciones_botones_widget)
         acciones_usuario_layout.addWidget(self.tabla_datos.info_tabla)
 

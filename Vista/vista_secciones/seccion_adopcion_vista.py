@@ -1,13 +1,22 @@
 from __future__ import annotations
-from PyQt6.QtWidgets import QMessageBox, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QTableWidget, QTableWidgetItem, QLineEdit, QHeaderView
+from PyQt6.QtWidgets import (
+    QMessageBox,
+    QWidget,
+    QVBoxLayout,
+    QHBoxLayout,
+    QPushButton,
+    QTableWidget,
+    QTableWidgetItem,
+    QLineEdit,
+    QHeaderView,
+)
 from PyQt6.QtCore import Qt
 from Vista.elementos.botones import BotonAccionTabla
 from Vista.elementos.tabla import Tabla
 
+
 class SeccionAdopcionVista(QWidget):
-
     def __init__(self):
-
         # barra_busqueda | input de busqueda
         barra_busqueda_layout = QHBoxLayout()
 
@@ -20,22 +29,33 @@ class SeccionAdopcionVista(QWidget):
         # barra_busqueda - composición
         barra_busqueda_layout.addWidget(self.input_busqueda)
         barra_busqueda_layout.addWidget(boton_busqueda)
-        barra_busqueda_layout.setAlignment(self.input_busqueda, Qt.AlignmentFlag.AlignRight)
+        barra_busqueda_layout.setAlignment(
+            self.input_busqueda, Qt.AlignmentFlag.AlignRight
+        )
 
         # acciones_tabla_layout <-- acá estarán contenidos los botones y la tabla de datos
         acciones_usuario_layout = QHBoxLayout()
         acciones_botones_layout = QVBoxLayout()
 
         # acciones_botones_layout | botones
-        self.registrar_adopcion = BotonAccionTabla("   Registrar\n   adopcion",
-                                     "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/aniadir_registro.png")
-        self.modificar_registro = BotonAccionTabla(" Modificar\n registro",
-                                            "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/modificar-registro.png")
-        self.eliminar_registro = BotonAccionTabla("  Eliminar\n  registro",
-                                      "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/eliminar-registro.png")
+        self.registrar_adopcion = BotonAccionTabla(
+            "   Registrar\n   adopcion",
+            "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/aniadir_registro.png",
+        )
+        self.modificar_registro = BotonAccionTabla(
+            " Modificar\n registro",
+            "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/modificar-registro.png",
+        )
+        self.eliminar_registro = BotonAccionTabla(
+            "  Eliminar\n  registro",
+            "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/eliminar-registro.png",
+        )
 
         # acciones_tabla_layout - composición
-        self.componer_layout(acciones_botones_layout, [self.registrar_adopcion, self.modificar_registro, self.eliminar_registro])
+        self.componer_layout(
+            acciones_botones_layout,
+            [self.registrar_adopcion, self.modificar_registro, self.eliminar_registro],
+        )
 
         acciones_botones_widget = QWidget()
         acciones_botones_widget.setLayout(acciones_botones_layout)

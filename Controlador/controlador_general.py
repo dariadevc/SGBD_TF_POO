@@ -11,11 +11,14 @@ from PyQt6.QtWidgets import (
 from Controlador.ControladorJefe.controlador_seccion_animales import (
     ControladorSeccionAnimales,
 )
-from Vista.elementos.encabezado import EncabezadoVista
+from Controlador.ControladorJefe.controlador_seccion_empleado import (
+    ControladorSeccionEmpleado,
+)
+from Vista.elementos.encabezado_empleado import EncabezadoVista
 
 
 class ControladorGeneral:
-    def __init__(self, estilo) -> None:
+    def __init__(self) -> None:
         self.__window = QMainWindow()
         self.__window.setWindowTitle("BestFriends")
         self.__window.setGeometry(100, 100, 800, 600)
@@ -59,8 +62,8 @@ class ControladorGeneral:
 
         self.__window.setCentralWidget(widget)
 
-        with open(estilo) as f:
-            self.__window.setStyleSheet(f.read())
+        # with open(estilo) as f:
+        #     self.__window.setStyleSheet(f.read())
 
     def actualizar_vista(self):
         # solo funciona para una vista, debería poder usar .currentWidget() para obtener los
@@ -103,10 +106,10 @@ class Vista1(QWidget):
         self.setLayout(layout)
 
 
-# if __name__ == "__main__":
-#     app = QApplication([])
-#     with open(estilo) as f:
-#         app.setStyleSheet(f.read())
-#     ventana = ControladorGeneral()
-#     ventana.window.show()
-#     app.exec()
+if __name__ == "__main__":
+    app = QApplication([])
+    with open("Vista/vista_secciones/estilo_main.qss") as f:
+        app.setStyleSheet(f.read())
+    ventana = ControladorGeneral()
+    ventana.window.show()
+    app.exec()

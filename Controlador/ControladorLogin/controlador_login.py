@@ -32,14 +32,15 @@ class ControladorLogin:
             if self.ventanaEmpleado is None:
                 # self.mostrar_ventana_seccion_empleado()
                 #     # self.app.exit()
-
-                # self.ventanaEmpleado = ControladorSeccionEmpleado(
-                #     "Vista/vista_secciones/estilo_main.qss"
-                # )
-
-                self.ventanaPrincipal = ControladorGeneral(
-                    "Vista/vista_secciones/estilo_main.qss"
-                )
+                # consulta tipo_usuario
+                # if tipo_usuario == "ENCARGADO":
+                    self.ventanaEmpleado = ControladorSeccionEmpleado(
+                        "Vista/vista_secciones/estilo_main.qss"
+                    )
+                # else:
+                #     self.ventanaPrincipal = ControladorGeneral(
+                #         "Vista/vista_secciones/estilo_main.qss"
+                #     )
                 self.__window.close()
         else:
             mensaje = QMessageBox()
