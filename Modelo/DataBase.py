@@ -19,7 +19,7 @@ class DataBase(metaclass=DataBaseMeta):
                 port="5432",
                 database="BestFriends_DB",
                 user="postgres",
-                password="postgres",
+                password="Nicokpo123",
             )
             print("¡Conexion exitosa!")
         except (Exception, psycopg2.DatabaseError) as error:
