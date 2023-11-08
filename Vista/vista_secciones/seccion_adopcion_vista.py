@@ -1,8 +1,8 @@
 from __future__ import annotations
 from PyQt6.QtWidgets import QMessageBox, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QTableWidget, QTableWidgetItem, QLineEdit, QHeaderView
 from PyQt6.QtCore import Qt
-from Vista.Clases.botones import BotonAccionTabla
-from Modelo.tabla import Tabla
+from Vista.elementos.botones import BotonAccionTabla
+from Vista.elementos.tabla import Tabla
 
 class SeccionAdopcionVista(QWidget):
 
