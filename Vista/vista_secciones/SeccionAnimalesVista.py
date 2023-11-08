@@ -11,9 +11,9 @@ from PyQt6.QtWidgets import (
     QHeaderView,
 )
 from PyQt6.QtCore import Qt
-from Vista.Elementos.botones import BotonAccionTabla
-from Vista.Elementos.tabla import Tabla
-from Vista.Elementos.barra_busqueda import BarraBusqueda
+from Vista.elementos.botones import BotonAccionTabla
+from Vista.elementos.tabla import Tabla
+from Vista.elementos.barra_busqueda import BarraBusqueda
 
 
 class SeccionAnimalesVista(QWidget):
