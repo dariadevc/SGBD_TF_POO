@@ -133,7 +133,7 @@ class ControladorSeccionEmpleado:
         
         guardar_button.clicked.connect(self.guardar_datos)
         dialog.setLayout(layout)
-        
+        dialog.exec()
         
     def mostrar_mensaje_error(mensaje):
         msg = QMessageBox()
