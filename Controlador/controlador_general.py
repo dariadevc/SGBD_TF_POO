@@ -1,7 +1,7 @@
 from __future__ import annotations
 from PyQt6.QtWidgets import QMainWindow, QApplication , QWidget, QVBoxLayout, QLabel, QPushButton, QStackedWidget
 from ControladorJefe.ControladorSeccionAnimales import ControladorSeccionAnimales
-from Vista.Clases.encabezado import EncabezadoVista
+from Vista.elementos.encabezado import EncabezadoVista
 
 
 
