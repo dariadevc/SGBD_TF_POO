@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt
-from Vista.Clases.botones import BotonNavegador
+from Vista.elementos.botones import BotonNavegador
 
 class EncabezadoVista (QVBoxLayout): #encabezado común para todas las vistas de VistaJefe
     
