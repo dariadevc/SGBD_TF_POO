@@ -19,8 +19,12 @@ class ControladorSeccionEmpleado:
         # self.__window.get_input_busqueda().editingFinished.connect(self.buscar_empleado)
 
         self.__window.get_input_busqueda().textChanged.connect(self.buscar_empleado)
-        self.__window.get_boton_eliminar().clicked.connect(self.mostrar_ventana_eliminar_empleado)
-        self.__window.get_boton_agregar().clicked.connect(self.mostrar_ventana_agregar_empleado)
+        self.__window.get_boton_eliminar().clicked.connect(
+            self.mostrar_ventana_eliminar_empleado
+        )
+        self.__window.get_boton_agregar().clicked.connect(
+            self.mostrar_ventana_agregar_empleado
+        )
 
         with open(estilo) as f:
             self.__window.setStyleSheet(f.read())
@@ -42,7 +46,11 @@ class ControladorSeccionEmpleado:
     def buscar_empleado(self):
         print("Buscando empleado")
         texto_busqueda = self.__window.obtener_usuario_buscado()
-        resultados = self.__base.getAll("SELECT dni_usuario, nombre_usuario, nombre, apellido FROM public.usuario WHERE nombre_usuario = '{}'".format(texto_busqueda))
+        resultados = self.__base.getAll(
+            "SELECT dni_usuario, nombre_usuario, nombre, apellido FROM public.usuario WHERE nombre_usuario = '{}'".format(
+                texto_busqueda
+            )
+        )
         self.__window.set_tabla_datos(resultados)
 
     def buscar_empleado(self):
@@ -53,15 +61,22 @@ class ControladorSeccionEmpleado:
                 )
             )
         )
+
     def eliminar_empleado(self):
         print("Elimino empleado")
         texto_buscado = self.eliminar_button.text()
         if texto_buscado:
-            consulta = ("DELETE FROM public.usuario WHERE dni_usuario = '{}'".format(texto_buscado))
+            consulta = "DELETE FROM public.usuario WHERE dni_usuario = '{}'".format(
+                texto_buscado
+            )
             try:
                 resultado = self.__base.query(consulta)
                 if resultado is not None:
-                    if self.__base.query("SELECT 1 FROM public.usuario WHERE dni_usuario = '{}'".format(texto_buscado,)):
+                    if self.__base.query(
+                        "SELECT 1 FROM public.usuario WHERE dni_usuario = '{}'".format(
+                            texto_buscado,
+                        )
+                    ):
                         print("Empleado eliminado")
                         self.dialogo_eliminar.close()
                     else:
@@ -97,7 +112,9 @@ class ControladorSeccionEmpleado:
     def mostrar_ventana_agregar_empleado(self):
         dialog = QDialog()
         dialog.setWindowTitle("Agregar Empleado")
-        dialog.setGeometry(100, 100, 400, 600)  # Aumenta la altura del cuadro de diálogo
+        dialog.setGeometry(
+            100, 100, 400, 600
+        )  # Aumenta la altura del cuadro de diálogo
 
         # Etiquetas y campos de entrada
         self.tipo_usuario_label = QLabel("Tipo de Usuario:")
@@ -115,7 +132,7 @@ class ControladorSeccionEmpleado:
         self.cuil_label = QLabel("CUIL:")
         self.cuil_input = QLineEdit()
 
-    # Permiso de adopción (checkbox)
+        # Permiso de adopción (checkbox)
         self.permiso_adopcion_label = QLabel("Permiso de Adopción:")
         self.permiso_adopcion_checkbox = QCheckBox()
 
@@ -172,22 +189,39 @@ class ControladorSeccionEmpleado:
         permiso_adopcion = self.permiso_adopcion_checkbox.isChecked()
 
         if tipo_usuario not in ["Administrador", "Encargado"]:
-            self.mostrar_mensaje_error("El tipo de usuario debe ser 'Administrador' o 'Encargado'.")
+            self.mostrar_mensaje_error(
+                "El tipo de usuario debe ser 'Administrador' o 'Encargado'."
+            )
         elif not dni.isdigit() or len(dni) != 8:
             self.mostrar_mensaje_error("DNI debe ser un número de 8 dígitos.")
         elif len(nombre) > 20 or len(apellido) > 20:
-            self.mostrar_mensaje_error("Nombre y apellido no deben superar los 20 caracteres.")
+            self.mostrar_mensaje_error(
+                "Nombre y apellido no deben superar los 20 caracteres."
+            )
         elif len(nro_cel) != 10 or not nro_cel.isdigit():
-            self.mostrar_mensaje_error("Número de celular debe tener 10 dígitos numéricos.")
+            self.mostrar_mensaje_error(
+                "Número de celular debe tener 10 dígitos numéricos."
+            )
         elif len(email) > 30:
-            self.mostrar_mensaje_error("Correo electrónico no debe superar los 30 caracteres.")
+            self.mostrar_mensaje_error(
+                "Correo electrónico no debe superar los 30 caracteres."
+            )
         elif len(cuil) > 13:
             self.mostrar_mensaje_error("CUIL debe tener 13 caracteres.")
         else:
-        # Si todas las validaciones son exitosas, procede a guardar los datos en la base de datos
+            # Si todas las validaciones son exitosas, procede a guardar los datos en la base de datos
             try:
-            # Utiliza la conexión existente de la clase DataBase
-                consulta = "INSERT INTO public.usuario (tipo_usuario, dni_usuario, apellido_usuario, nombre_usuario, nro_cel_usuario, email_usuario, cuil_usuario, permiso_adopcion) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(tipo_usuario,dni,apellido,nombre,nro_cel,email,cuil,permiso_adopcion)
+                # Utiliza la conexión existente de la clase DataBase
+                consulta = "INSERT INTO public.usuario (tipo_usuario, dni_usuario, apellido_usuario, nombre_usuario, nro_cel_usuario, email_usuario, cuil_usuario, permiso_adopcion) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(
+                    tipo_usuario,
+                    dni,
+                    apellido,
+                    nombre,
+                    nro_cel,
+                    email,
+                    cuil,
+                    permiso_adopcion,
+                )
 
                 self.__base.query(consulta)
 

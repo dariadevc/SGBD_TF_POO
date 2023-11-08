@@ -32,7 +32,7 @@ class ControladorLogin:
                 # self.mostrar_ventana_seccion_empleado()
                 #     # self.app.exit()
                 self.ventanaEmpleado = ControladorSeccionEmpleado(
-                    "Vista\VistaJefe\style.qss"
+                    "Vista/vista_secciones/style.qss"
                 )
                 self.__window.close()
         else:
