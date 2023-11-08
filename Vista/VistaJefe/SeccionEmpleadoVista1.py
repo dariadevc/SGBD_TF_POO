@@ -208,19 +208,4 @@ class SeccionEmpleadoVista (QMainWindow):
     def get_boton_modificar (self):
         return self.modificar_e
     
-    def mostrar_ventana_eliminar_empleado(self):
-        dialogo_eliminar = QDialog(self)
-        dialogo_eliminar.setWindowTitle("Eliminar Empleado")
-
-        layout = QVBoxLayout()
-
-        dni_label = QLabel("DNI del empleado a eliminar:")
-        self.dni_input = QLineEdit()
-        eliminar_button = QPushButton("Eliminar")
-
-        layout.addWidget(dni_label)
-        layout.addWidget(self.dni_input)
-        layout.addWidget(eliminar_button)
-
-        dialogo_eliminar.setLayout(layout)
-        dialogo_eliminar.exec()
+ 
