@@ -114,20 +114,18 @@ class SeccionEmpleadoVista(QMainWindow):
         self.setWindowIcon(QIcon("Vista/Media/logo-bsf.png"))
 
         # # barra_busqueda | input de busqueda
-        # barra_busqueda_layout = QHBoxLayout()
+        barra_busqueda_layout = QHBoxLayout()
 
-        # self.input_busqueda = QLineEdit()
-        # self.input_busqueda.setPlaceholderText("Buscar...")
-        # self.input_busqueda.setFixedWidth(200)
-        # # self.input_busqueda.textChanged.connect(self.set_tabla_datos)
+        self.input_busqueda = QLineEdit()
+        self.input_busqueda.setPlaceholderText("Buscar...")
+        self.input_busqueda.setFixedWidth(200)
+        # self.input_busqueda.textChanged.connect(self.set_tabla_datos)
 
-        # # barra_busqueda - composición
-        # barra_busqueda_layout.addWidget(self.input_busqueda)
-        # barra_busqueda_layout.setAlignment(
-        #     self.input_busqueda, Qt.AlignmentFlag.AlignRight
-        # )
-
-        self.barra_busqueda_layout = BarraBusqueda()
+        # barra_busqueda - composición
+        barra_busqueda_layout.addWidget(self.input_busqueda)
+        barra_busqueda_layout.setAlignment(
+            self.input_busqueda, Qt.AlignmentFlag.AlignRight
+        )
 
         # acciones_tabla_layout <-- acá estarán contenidos los botones y la tabla de datos
         acciones_usuario_layout = QHBoxLayout()

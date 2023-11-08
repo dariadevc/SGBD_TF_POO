@@ -34,9 +34,9 @@ class ControladorLogin:
                 #     # self.app.exit()
                 # consulta tipo_usuario
                 # if tipo_usuario == "ENCARGADO":
-                    self.ventanaEmpleado = ControladorSeccionEmpleado(
-                        "Vista/vista_secciones/estilo_main.qss"
-                    )
+                self.ventanaEmpleado = ControladorSeccionEmpleado(
+                    "Vista/vista_secciones/estilo_main.qss"
+                )
                 # else:
                 #     self.ventanaPrincipal = ControladorGeneral(
                 #         "Vista/vista_secciones/estilo_main.qss"

@@ -106,8 +106,23 @@ class EncabezadoVista(
         for w in widgets:
             layout.addWidget(w)
 
+    def get_boton_informes(self):
+        return self.boton_seccion_informes
+
+    def get_boton_empleados(self):
+        return self.boton_seccion_empleados
+
     def get_boton_adopcion(self):
         return self.boton_seccion_adopcion
 
     def get_boton_animales(self):
         return self.boton_seccion_animales
+
+    def get_boton_adoptantes(self):
+        return self.boton_seccion_adoptantes
+
+    def get_boton_visitas(self):
+        return self.boton_seccion_visitas
+
+    def get_boton_visitantes(self):
+        return self.boton_seccion_visitantes

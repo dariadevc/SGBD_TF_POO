@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QApplication
 import sys
-from Controlador.ControladorLogin.controlador_login import ControladorLogin
+from Controlador.controlador_login.controlador_login import ControladorLogin
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
