@@ -176,10 +176,10 @@ class ControladorSeccionEmpleado:
         # Si todas las validaciones son exitosas, procede a guardar los datos en la base de datos
             try:
             # Utiliza la conexión existente de la clase DataBase
-                consulta = "INSERT INTO public.usuario (tipo_usuario, dni_usuario, apellido_usuario, nombre_usuario, nro_cel_usuario, email_usuario, cuil_usuario, permiso_adopcion) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(tipo_usuario,dni,apellido,nombre,nro_cel,email,cuil,permiso_adopcion)
+                consulta = "INSERT INTO public.usuario (tipo_usuario, dni_usuario, apellido_usuario, nombre_usuario, nro_cel_usuario, email_usuario, cuil_usuario, permiso_adopcion) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(tipo_usuario,dni,apellido,nombre,nro_cel,email,cuil,permiso_adopcion)
                 
                 self.__base.query(consulta)
 
-                self.mostrar_mensaje_exito("Datos guardados exitosamente.")
+                print("Datos guardados exitosamente.")
             except Exception as e:
-                self.mostrar_mensaje_error("Error al guardar los datos")
+                print("Error al guardar los datos")
