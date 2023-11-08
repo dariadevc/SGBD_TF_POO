@@ -7,7 +7,7 @@ class Animal:
         self.__sexo = ""
         self.__etapa_vida = None
         self.__edad_estimada = ""
-        self.__peso = False
+        self.__peso = ""
         self.__tamanio = ""
         self.__descripcion = ""
         self.__flag_castrado = False

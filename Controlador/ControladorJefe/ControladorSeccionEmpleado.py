@@ -1,6 +1,6 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QDialog, QLineEdit, QLabel, QVBoxLayout, QPushButton, QMessageBox, QCheckBox
-from Vista.VistaJefe.SeccionEmpleadoVista1 import SeccionEmpleadoVista
+from PyQt6.QtWidgets import QApplication
+from Vista.vista_secciones.SeccionEmpleadoVista1 import SeccionEmpleadoVista
 from Modelo.DataBase import DataBase
 
 
@@ -13,12 +13,15 @@ class ControladorSeccionEmpleado:
         self.__window.setWindowTitle("Best Friends")
         self.__window.show()
         # empleado = self.__window.obtener_usuario_buscado()
+        self.__window.get_input_busqueda().editingFinished.connect(self.buscar_empleado)
+        self.__window.get_input_busqueda().textChanged.connect(self.buscar_empleado)
+        # empleado = self.__window.obtener_usuario_buscado()
         # self.__window.get_input_busqueda().editingFinished.connect(self.buscar_empleado)
 
         self.__window.get_input_busqueda().textChanged.connect(self.buscar_empleado)
         self.__window.get_boton_eliminar().clicked.connect(self.mostrar_ventana_eliminar_empleado)
         self.__window.get_boton_agregar().clicked.connect(self.mostrar_ventana_agregar_empleado)
-    
+
         with open(estilo) as f:
             self.__window.setStyleSheet(f.read())
         # app.exec()
@@ -42,6 +45,14 @@ class ControladorSeccionEmpleado:
         resultados = self.__base.getAll("SELECT dni_usuario, nombre_usuario, nombre, apellido FROM public.usuario WHERE nombre_usuario = '{}'".format(texto_busqueda))
         self.__window.set_tabla_datos(resultados)
 
+    def buscar_empleado(self):
+        SeccionEmpleadoVista.set_tabla_datos(
+            self.__base.getAll(
+                "SELECT dni, nombre_usuario, nombre, apellido FROM public.usuarios WHERE nombre_usuario = '{}'".format(
+                    self.__window.obtener_usuario_buscado()
+                )
+            )
+        )
     def eliminar_empleado(self):
         print("Elimino empleado")
         texto_buscado = self.eliminar_button.text()
@@ -65,7 +76,7 @@ class ControladorSeccionEmpleado:
                 print("Error en la base de datos")
         else:
             print("El campo DNI esta vacio")
-    
+
     def mostrar_ventana_eliminar_empleado(self):
         self.dialogo_eliminar = QDialog()
         self.dialogo_eliminar.setWindowTitle("Eliminar Empleado")
@@ -82,7 +93,7 @@ class ControladorSeccionEmpleado:
 
         self.dialogo_eliminar.setLayout(layout)
         self.dialogo_eliminar.exec()
-    
+
     def mostrar_ventana_agregar_empleado(self):
         dialog = QDialog()
         dialog.setWindowTitle("Agregar Empleado")
@@ -130,18 +141,18 @@ class ControladorSeccionEmpleado:
         layout.addWidget(self.permiso_adopcion_label)
         layout.addWidget(self.permiso_adopcion_checkbox)
         layout.addWidget(guardar_button)
-        
+
         guardar_button.clicked.connect(self.guardar_datos)
         dialog.setLayout(layout)
         dialog.exec()
-        
+
     def mostrar_mensaje_error(mensaje):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Critical)
         msg.setText(mensaje)
         msg.setWindowTitle("Error")
         msg.exec()
-    
+
     def mostrar_mensaje_exito(mensaje):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
@@ -159,7 +170,7 @@ class ControladorSeccionEmpleado:
         email = self.email_input.text()
         cuil = self.cuil_input.text()
         permiso_adopcion = self.permiso_adopcion_checkbox.isChecked()
-        
+
         if tipo_usuario not in ["Administrador", "Encargado"]:
             self.mostrar_mensaje_error("El tipo de usuario debe ser 'Administrador' o 'Encargado'.")
         elif not dni.isdigit() or len(dni) != 8:
@@ -177,7 +188,7 @@ class ControladorSeccionEmpleado:
             try:
             # Utiliza la conexión existente de la clase DataBase
                 consulta = "INSERT INTO public.usuario (tipo_usuario, dni_usuario, apellido_usuario, nombre_usuario, nro_cel_usuario, email_usuario, cuil_usuario, permiso_adopcion) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(tipo_usuario,dni,apellido,nombre,nro_cel,email,cuil,permiso_adopcion)
-                
+
                 self.__base.query(consulta)
 
                 print("Datos guardados exitosamente.")

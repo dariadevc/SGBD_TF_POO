@@ -19,11 +19,11 @@ QPushButton#boton-nav{
 }
 
 QPushButton#boton-nav:hover{
-    background-color:#2980b9;
+    background-color:#e655c4;
 }
 
 QPushButton#boton-nav:pressed{
-    background-color:#1c6ea3;
+    background-color:#d43fb1;
 }
 
 QPushButton#boton-nav-presionado{

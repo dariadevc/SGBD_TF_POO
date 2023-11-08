@@ -1,5 +1,5 @@
 import psycopg2
-
+from passw import clave
 
 class DataBaseMeta(type):
     __instances = None
@@ -19,7 +19,7 @@ class DataBase(metaclass=DataBaseMeta):
                 port="5432",
                 database="BestFriends_DB",
                 user="postgres",
-                password="Nicokpo123",
+                password=clave,
             )
             print("¡Conexion exitosa!")
         except (Exception, psycopg2.DatabaseError) as error:
