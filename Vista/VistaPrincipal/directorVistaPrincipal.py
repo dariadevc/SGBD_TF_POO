@@ -1,5 +1,4 @@
-from builderVistaPrincipal import BuilderVistaPrincipal
-
+from Vista.VistaPrincipal.builderVistaPrincipal import BuilderVistaPrincipal
 
 class DirectorVistaPrincipal:
     def __init__(self) -> None:
