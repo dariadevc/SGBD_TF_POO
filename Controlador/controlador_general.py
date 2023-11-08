@@ -49,7 +49,10 @@ class ControladorGeneral():
     def actualizar_vista(self):
         #solo funciona para una vista, debería poder usar .currentWidget() para obtener los
         #datos de la vista que se está mostrando
+        self.vista_actual.currentWidget()
+
         nuevos_datos = self.vistaAnimal.obtener_datos()
+        nuevos_datos = self.vista_actual.currentWidget()
         self.vistaAnimal.window.tabla_datos.actualizar_tabla(nuevos_datos)
 
 
