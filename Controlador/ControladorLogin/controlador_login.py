@@ -8,6 +8,7 @@ from Modelo.Usuario import Usuario
 from Controlador.ControladorJefe.controlador_seccion_empleado import (
     ControladorSeccionEmpleado,
 )
+from Controlador.controlador_general import ControladorGeneral
 
 
 class ControladorLogin:
@@ -31,7 +32,12 @@ class ControladorLogin:
             if self.ventanaEmpleado is None:
                 # self.mostrar_ventana_seccion_empleado()
                 #     # self.app.exit()
-                self.ventanaEmpleado = ControladorSeccionEmpleado(
+
+                # self.ventanaEmpleado = ControladorSeccionEmpleado(
+                #     "Vista/vista_secciones/estilo_main.qss"
+                # )
+
+                self.ventanaPrincipal = ControladorGeneral(
                     "Vista/vista_secciones/estilo_main.qss"
                 )
                 self.__window.close()

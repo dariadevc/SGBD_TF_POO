@@ -10,7 +10,7 @@ class ControladorSeccionAnimales:
         self.__window = SeccionAnimalesVista()
         self.__window.tabla_datos.actualizar_tabla(self.obtener_datos())
         self.__window.get_boton_modif_empleado().clicked.connect(
-            self.mostrar_ventana_modificar_empleado
+            self.mostrar_ventana_modificar_animal
         )
         self.__window.get_input_busqueda().editingFinished.connect(self.buscar_animal)
         self.__window.get_input_busqueda().textChanged.connect(self.buscar_animal)
@@ -19,9 +19,9 @@ class ControladorSeccionAnimales:
     def window(self) -> SeccionAnimalesVista:
         return self.__window
 
-    def mostrar_ventana_modificar_empleado(self):
+    def mostrar_ventana_modificar_animal(self):
         self.dialogo_eliminar = QDialog()
-        self.dialogo_eliminar.setWindowTitle("Modificar Empleado")
+        self.dialogo_eliminar.setWindowTitle("Modificar Animal")
 
         layout = QVBoxLayout()
 
@@ -37,14 +37,14 @@ class ControladorSeccionAnimales:
 
     def obtener_datos(self):
         datos = self.__base.getAll(
-            'SELECT tipo_animal, nombre_animal, sexo_animal, etapa_vida_animal FROM public."ANIMAL"'
+            "SELECT tipo_animal, nombre_animal, sexo_animal, etapa_vida_animal FROM public.animal"
         )
         print((datos))
         return datos
 
     def buscar_animal(self):
         datos = self.__base.getAll(
-            "SELECT tipo_animal, nombre_animal, sexo_animal, etapa_vida_animal FROM public.\"ANIMAL\" WHERE tipo_animal = '{}'".format(
+            "SELECT tipo_animal, nombre_animal, sexo_animal, etapa_vida_animal FROM public.animal WHERE tipo_animal = '{}'".format(
                 self.__window.obtener_animal_buscado()
             )
         )
