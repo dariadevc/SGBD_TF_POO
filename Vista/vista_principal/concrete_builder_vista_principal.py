@@ -1,7 +1,7 @@
-from builderVistaPrincipal import BuilderVistaPrincipal
-from vistaPrincipal import VistaPrincipal
-from Vista.Clases.encabezado import EncabezadoVista
-from vista_secciones.SeccionAnimalesVista import SeccionAnimalesVista
+from builder_vista_principal import BuilderVistaPrincipal
+from vista_principal import VistaPrincipal
+from Vista.elementos.encabezado import EncabezadoVista
+from Vista.vista_secciones.SeccionAnimalesVista import SeccionAnimalesVista
 
 
 class ConcreteBuilderVistaPrincipal(BuilderVistaPrincipal):

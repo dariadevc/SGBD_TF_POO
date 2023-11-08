@@ -2,10 +2,10 @@ import sys
 from PyQt6.QtWidgets import QHeaderView, QTableWidget, QTableWidgetItem
 from PyQt6.QtCore import Qt
 
-class Tabla(QTableWidget):
 
+class Tabla(QTableWidget):
     def actualizar_tabla(self, nuevos_datos):
-        self.setRowCount(0) #vacia las filas de la tabla
+        self.setRowCount(0)  # vacia las filas de la tabla
         self.setColumnCount(0)
 
         nuevos_datos = nuevos_datos
@@ -22,10 +22,11 @@ class Tabla(QTableWidget):
                 self.setItem(fila_idx, columna_idx, item)
 
         for col in range(4):
-            self.horizontalHeader().setSectionResizeMode(col, QHeaderView.ResizeMode.Stretch)
+            self.horizontalHeader().setSectionResizeMode(
+                col, QHeaderView.ResizeMode.Stretch
+            )
 
-
-    def add_fila (self, datos_fila):
+    def add_fila(self, datos_fila):
         posicion_fila = self.rowCount()
         self.insertRow(posicion_fila)
 
@@ -33,8 +34,6 @@ class Tabla(QTableWidget):
             celda = QTableWidgetItem(item)
             self.setItem(posicion_fila, posicion_columna, celda)
 
-
     @property
     def info_tabla(self):
         return self
-        

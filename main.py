@@ -1,6 +1,10 @@
-from Controlador.ControladorLogin.ControladorLogin1 import ControladorLogin
-from Controlador.ControladorJefe.ControladorSeccionEmpleado1 import ControladorSeccionEmpleado
-from Controlador.ControladorJefe.ControladorSeccionAnimales import ControladorSeccionAnimales
+from Controlador.ControladorLogin.ControladorLogin import ControladorLogin
+from Controlador.ControladorJefe.ControladorSeccionEmpleado import (
+    ControladorSeccionEmpleado,
+)
+from Controlador.ControladorJefe.ControladorSeccionAnimales import (
+    ControladorSeccionAnimales,
+)
 from PyQt6.QtWidgets import QApplication
 import sys
 
@@ -9,7 +13,7 @@ import sys
 # ControladorLogin("Vista/VistaLogin/estilos.qss")
 
 
-if  __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication(sys.argv)
     controlador = ControladorLogin("Vista\VistaLogin\estilos.qss")
     # if controlador.login():
