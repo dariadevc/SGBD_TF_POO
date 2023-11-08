@@ -1,5 +1,5 @@
 from Controlador.ControladorLogin.ControladorLogin1 import ControladorLogin
-from Controlador.ControladorJefe.ControladorSeccionEmpleado1 import (
+from Controlador.ControladorJefe.ControladorSeccionEmpleado import (
     ControladorSeccionEmpleado,
 )
 from Controlador.ControladorJefe.ControladorSeccionAnimales import (
