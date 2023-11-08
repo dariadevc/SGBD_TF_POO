@@ -7,8 +7,6 @@ from Modelo.tabla import Tabla
 
 class SeccionAnimalesVista (QWidget):
 
-    info_tabla = []
-
     def __init__(self):
         super().__init__()
 
@@ -43,39 +41,8 @@ class SeccionAnimalesVista (QWidget):
         acciones_botones_widget.setObjectName("contenedor-botones-tabla")
 
         #tabla
-        # tabla_datos = QTableWidget(4,5) #4 filas y 4 columnas
-        # tabla_datos.setHorizontalHeaderLabels(["Nombre", "Sexo", "Edad", "Peso", "Tipo"])
-        # tabla_datos.verticalHeader().setVisible(False)
-
-        # for col in range(4):
-        #     tabla_datos.horizontalHeader().setSectionResizeMode(col, QHeaderView.ResizeMode.Stretch)
-        #
-        #
-        # for i in range(tabla_datos.rowCount()):
-        #     for j in range(tabla_datos.columnCount()):
-        #         tabla_datos.setItem(i, j, QTableWidgetItem(f"Celda {i}, {j}"))
 
         self.tabla_datos = Tabla()
-
-
-
-        # info_tabla = [] <-- atributo de clase que estoy usando
-
-        # tabla_datos.setRowCount(len(SeccionAnimalesVista.info_tabla))
-        # tabla_datos.setColumnCount(len(SeccionAnimalesVista.info_tabla[0]))
-        # tabla_datos.setHorizontalHeaderLabels(["DNI", "USUARIO", "NOMBRE", "APELLIDO"])
-        # tabla_datos.verticalHeader().setVisible(False)
-        #
-        # for row_idx, row in enumerate(SeccionAnimalesVista.info_tabla):
-        #     for col_idx, col_data in enumerate(row):
-        #         item = QTableWidgetItem(str(col_data))
-        #         item.setFlags(item.flags() ^ Qt.ItemFlag.ItemIsEditable)
-        #         tabla_datos.setItem(row_idx, col_idx, item)
-        # for col in range(4):
-        #     tabla_datos.horizontalHeader().setSectionResizeMode(col, QHeaderView.ResizeMode.Stretch)
-        #
-        # tabla_datos.setColumnWidth(3, 200)
-
 
         #acciones_tabla_layout - composición
         acciones_usuario_layout.addWidget(acciones_botones_widget)
