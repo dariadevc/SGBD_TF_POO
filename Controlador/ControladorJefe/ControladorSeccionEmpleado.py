@@ -46,10 +46,26 @@ class ControladorSeccionEmpleado:
         print("Elimino empleado")
         texto_buscado = self.eliminar_button.text()
         if texto_buscado:
-            self.__base.query("DELETE FROM public.usuario WHERE dni_usuario = '{}'".format(texto_buscado))
-            print("Empleado eliminado")
-            self.dialogo_eliminar.close()
-
+            consulta = ("DELETE FROM public.usuario WHERE dni_usuario = '{}'".format(texto_buscado))
+            try:
+                resultado = self.__base.query(consulta)
+                if resultado is not None:
+                    if self.__base.query("SELECT 1 FROM public.usuario WHERE dni_usuario = '{}'".format(texto_buscado,)):
+                        print("Empleado eliminado")
+                        self.dialogo_eliminar.close()
+                    else:
+                        mensaje = QMessageBox()
+                        mensaje.setIcon(QMessageBox.Icon.Warning)
+                        mensaje.setWindowTitle("Mensaje de Error")
+                        mensaje.setText("No hay ningún usuario con ese DNI")
+                        mensaje.exec()
+                else:
+                    print("Error en la consulta")
+            except Exception as e:
+                print("Error en la base de datos")
+        else:
+            print("El campo DNI esta vacio")
+    
     def mostrar_ventana_eliminar_empleado(self):
         self.dialogo_eliminar = QDialog()
         self.dialogo_eliminar.setWindowTitle("Eliminar Empleado")
