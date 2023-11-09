@@ -45,10 +45,11 @@ class ControladorSeccionEmpleado:
 
     def eliminar_empleado(self):
         print("Elimino empleado")
-        texto_buscado = self.eliminar_button.text()
+        texto_buscado = self.dni_input.text()
         if texto_buscado:
             try:
                 consulta = "DELETE FROM public.usuario WHERE dni_usuario ={}".format(texto_buscado)
+                print(consulta)
                 self.__base.query(consulta)
                 self.mostrar_mensaje_exito("Usuario eliminado")
             except Exception as e:
@@ -56,6 +57,15 @@ class ControladorSeccionEmpleado:
         else:
             print("El campo DNI esta vacio")
     
+    # try:
+    #         # Utiliza la conexión existente de la clase DataBase
+    #             consulta = "INSERT INTO public.usuario (tipo_usuario, dni_usuario, apellido_usuario, nombre_usuario, nro_cel_usuario, email_usuario, cuil_usuario, permisos_adopcion,alias_usuario,contrasenia_usuario) VALUES ('{}', {}, '{}', '{}', {}, '{}', {}, {},{},{})".format(tipo_usuario,dni,apellido,nombre,nro_cel,email,cuil,permiso_adopcion,dni,dni)
+    #             print(consulta)
+    #             self.__base.query(consulta)
+
+    #             print("Datos guardados exitosamente.")
+    #         except Exception as e:
+    #             print("Error al guardar los datos")
     def mostrar_ventana_eliminar_empleado(self):
         self.dialogo_eliminar = QDialog()
         self.dialogo_eliminar.setWindowTitle("Eliminar Empleado")
@@ -148,7 +158,7 @@ class ControladorSeccionEmpleado:
         cuil = self.cuil_input.text()
         permiso_adopcion = self.permiso_adopcion_checkbox.isChecked()
         
-        if tipo_usuario not in ["Administrador", "Encargado"]:
+        if tipo_usuario not in ["Admin", "Encargado"]:
             self.mostrar_mensaje_error("El tipo de usuario debe ser 'Administrador' o 'Encargado'.")
         elif not dni.isdigit() or len(dni) != 8:
             self.mostrar_mensaje_error("DNI debe ser un número de 8 dígitos.")
