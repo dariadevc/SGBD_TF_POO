@@ -28,26 +28,26 @@ class ControladorLogin:
     def login(self):
         usuario = Usuario(self.__window.get_usuario(), self.__window.get_contrasenia())
         usuario.login()
-        if usuario.login():
-            if self.ventanaEmpleado is None:
-                # self.mostrar_ventana_seccion_empleado()
-                #     # self.app.exit()
-
-                # self.ventanaEmpleado = ControladorSeccionEmpleado(
-                #     "Vista/vista_secciones/estilo_main.qss"
-                # )
-
-                self.ventanaPrincipal = ControladorGeneral(
-                    "Vista/vista_secciones/estilo_main.qss"
-                )
-                self.__window.close()
-        else:
-            mensaje = QMessageBox()
-            mensaje.show()
-            mensaje.setIcon(QMessageBox.Icon.Information)
-            mensaje.setWindowTitle("Error")
-            mensaje.setText("Credenciales erroneas.")
-            mensaje.exec()
+        print("listo")
+        # if usuario.login():
+        #
+        #     if self.ventanaEmpleado is None:
+        #         # self.mostrar_ventana_seccion_empleado()
+        #         #     # self.app.exit()
+        #
+        #         # self.ventanaEmpleado = ControladorSeccionEmpleado(
+        #         #     "Vista/vista_secciones/estilo_main.qss"
+        #         # )
+        #         self.ventanaPrincipal = ControladorGeneral()
+        #
+        #         self.__window.close()
+        # else:
+        #     mensaje = QMessageBox()
+        #     mensaje.show()
+        #     mensaje.setIcon(QMessageBox.Icon.Information)
+        #     mensaje.setWindowTitle("Error")
+        #     mensaje.setText("Credenciales erroneas.")
+        #     mensaje.exec()
         #     # interfaz.get_ventana().show()
         # self.__window.close()
 

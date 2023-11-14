@@ -14,92 +14,100 @@ from Modelo.DataBase import DataBase
 
 
 class ControladorSeccionEmpleado:
-    def __init__(self, estilo):
-        # app = QApplication(sys.argv)
+    def __init__(self):
         self.__base = DataBase()
-        self.obtener_empleados()
         self.__window = SeccionEmpleadoVista()
-        self.__window.setWindowTitle("Best Friends")
-        self.__window.show()
-        # empleado = self.__window.obtener_usuario_buscado()
+
+        self.__window.tabla_datos.actualizar_tabla(self.obtener_datos())
+
         self.__window.get_input_busqueda().editingFinished.connect(self.buscar_empleado)
         self.__window.get_input_busqueda().textChanged.connect(self.buscar_empleado)
-        # empleado = self.__window.obtener_usuario_buscado()
-        # self.__window.get_input_busqueda().editingFinished.connect(self.buscar_empleado)
 
-        self.__window.get_input_busqueda().textChanged.connect(self.buscar_empleado)
-        self.__window.get_boton_eliminar().clicked.connect(
-            self.mostrar_ventana_eliminar_empleado
-        )
-        self.__window.get_boton_agregar().clicked.connect(
-            self.mostrar_ventana_agregar_empleado
-        )
+        self.__window.get_boton_eliminar_empleado().clicked.connect(self.mostrar_ventana_eliminar_empleado)
+        self.__window.get_boton_agregar_empleado().clicked.connect(self.mostrar_ventana_agregar_empleado)
 
-        with open(estilo) as f:
-            self.__window.setStyleSheet(f.read())
+    @property
+    def window(self):
+        return self.__window
+
+        # with open(estilo) as f:
+        #     self.__window.setStyleSheet(f.read())
         # app.exec()
 
-    def obtener_empleados(self):
-        SeccionEmpleadoVista.set_tabla_datos(
-            self.__base.getAll(
-                "SELECT dni_usuario, alias_usuario, nombre_usuario, apellido_usuario FROM public.usuario"
-            )
+    # def obtener_empleados(self):
+    #     SeccionEmpleadoVista.set_tabla_datos(
+    #         self.__base.getAll(
+    #             "SELECT dni_usuario, alias_usuario, nombre_usuario, apellido_usuario FROM public.usuario"
+    #         )
+    #     )
+
+
+    def obtener_datos(self):
+        datos = self.__base.getAll(
+            "SELECT tipo_usuario, dni_usuario, nombre_usuario, apellido_usuario, nro_cel_usuario, email_usuario, cuil_usuario FROM public.usuario"
         )
+        print((datos))
+        return datos
 
-    # def get_ventana (self):
-    #     return self.__window
 
-    # def mostrar_ventana (self):
-    #     return self.__window.show()
+    # def buscar_empleado(self):
+    #     print("Buscando empleado")
+    #     texto_busqueda = self.__window.obtener_usuario_buscado()
+    #     resultados = self.__base.getAll(
+    #         "SELECT dni_usuario, nombre_usuario, nombre, apellido FROM public.usuario WHERE nombre_usuario = '{}'".format(
+    #             texto_busqueda
+    #         )
+    #     )
+    #     self.__window.set_tabla_datos(resultados)
+    #
+    # def buscar_empleado(self):
+    #     SeccionEmpleadoVista.set_tabla_datos(
+    #         self.__base.getAll(
+    #             "SELECT dni, nombre_usuario, nombre, apellido FROM public.usuarios WHERE nombre_usuario = '{}'".format(
+    #                 self.__window.obtener_usuario_buscado()
+    #             )
+    #         )
+    #     )
 
     def buscar_empleado(self):
-        print("Buscando empleado")
-        texto_busqueda = self.__window.obtener_usuario_buscado()
-        resultados = self.__base.getAll(
-            "SELECT dni_usuario, nombre_usuario, nombre, apellido FROM public.usuario WHERE nombre_usuario = '{}'".format(
-                texto_busqueda
+        datos = self.__base.getAll(
+            "SELECT tipo_usuario, dni_usuario, nombre_usuario, alias_usuario FROM public.usuario WHERE tipo_usuario = '{}'".format(
+                self.__window.obtener_empleado_buscado()
             )
         )
-        self.__window.set_tabla_datos(resultados)
+        print((datos))
+        return datos
 
-    def buscar_empleado(self):
-        SeccionEmpleadoVista.set_tabla_datos(
-            self.__base.getAll(
-                "SELECT dni, nombre_usuario, nombre, apellido FROM public.usuarios WHERE nombre_usuario = '{}'".format(
-                    self.__window.obtener_usuario_buscado()
-                )
-            )
-        )
-
-    def eliminar_empleado(self):
-        print("Elimino empleado")
-        texto_buscado = self.eliminar_button.text()
-        if texto_buscado:
-            consulta = "DELETE FROM public.usuario WHERE dni_usuario = '{}'".format(
-                texto_buscado
-            )
-            try:
-                resultado = self.__base.query(consulta)
-                if resultado is not None:
-                    if self.__base.query(
-                        "SELECT 1 FROM public.usuario WHERE dni_usuario = '{}'".format(
-                            texto_buscado,
-                        )
-                    ):
-                        print("Empleado eliminado")
-                        self.dialogo_eliminar.close()
-                    else:
-                        mensaje = QMessageBox()
-                        mensaje.setIcon(QMessageBox.Icon.Warning)
-                        mensaje.setWindowTitle("Mensaje de Error")
-                        mensaje.setText("No hay ningún usuario con ese DNI")
-                        mensaje.exec()
-                else:
-                    print("Error en la consulta")
-            except Exception:
-                print("Error en la base de datos")
-        else:
-            print("El campo DNI esta vacio")
+    #
+    # def eliminar_empleado(self):
+    #     print("Elimino empleado")
+    #     texto_buscado = self.eliminar_button.text()
+    #     if texto_buscado:
+    #         consulta = "DELETE FROM public.usuario WHERE dni_usuario = '{}'".format(
+    #             texto_buscado
+    #         )
+    #         try:
+    #             resultado = self.__base.query(consulta)
+    #             if resultado is not None:
+    #                 if self.__base.query(
+    #                     "SELECT 1 FROM public.usuario WHERE dni_usuario = '{}'".format(
+    #                         texto_buscado,
+    #                     )
+    #                 ):
+    #                     print("Empleado eliminado")
+    #                     self.dialogo_eliminar.close()
+    #                 else:
+    #                     mensaje = QMessageBox()
+    #                     mensaje.setIcon(QMessageBox.Icon.Warning)
+    #                     mensaje.setWindowTitle("Mensaje de Error")
+    #                     mensaje.setText("No hay ningún usuario con ese DNI")
+    #                     mensaje.exec()
+    #             else:
+    #                 print("Error en la consulta")
+    #         except Exception:
+    #             print("Error en la base de datos")
+    #     else:
+    #         print("El campo DNI esta vacio")
 
     def mostrar_ventana_eliminar_empleado(self):
         self.dialogo_eliminar = QDialog()
@@ -110,14 +118,14 @@ class ControladorSeccionEmpleado:
         dni_label = QLabel("DNI del empleado a eliminar:")
         self.dni_input = QLineEdit()
         self.eliminar_button = QPushButton("Eliminar")
-        self.eliminar_button.clicked.connect(self.eliminar_empleado)
+        # self.eliminar_button.clicked.connect(self.eliminar_empleado)
         layout.addWidget(dni_label)
         layout.addWidget(self.dni_input)
         layout.addWidget(self.eliminar_button)
 
         self.dialogo_eliminar.setLayout(layout)
         self.dialogo_eliminar.exec()
-
+    #
     def mostrar_ventana_agregar_empleado(self):
         dialog = QDialog()
         dialog.setWindowTitle("Agregar Empleado")
@@ -223,7 +231,7 @@ class ControladorSeccionEmpleado:
                 # Utiliza la conexión existente de la clase DataBase
                 alias = dni
                 contrasenia = dni
-                consulta = "INSERT INTO public.usuario (tipo_usuario, dni_usuario, apellido_usuario, nombre_usuario, alias_usuario, nro_cel_usuario, email_usuario, contrasenia_usuario, cuil_usuario, permiso_adopcion) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')".format(
+                consulta = "INSERT INTO public.usuario (tipo_usuario, dni_usuario, apellido_usuario, nombre_usuario, alias_usuario, nro_cel_usuario, email_usuario, contrasenia_usuario, cuil_usuario, permiso_adopcion) VALUES ('{}', {}, '{}', '{}', {}, '{}', '{}', '{}', '{}', {})".format(
                     tipo_usuario,
                     dni,
                     apellido,
@@ -241,3 +249,75 @@ class ControladorSeccionEmpleado:
                 self.mostrar_mensaje_exito("Datos guardados exitosamente.")
             except Exception:
                 self.mostrar_mensaje_error("Error al guardar los datos")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# from PyQt6.QtWidgets import QVBoxLayout, QLabel, QPushButton, QLineEdit, QDialog
+# from Vista.vista_secciones.seccion_empleado_vista import SeccionEmpleadoVista
+# from Modelo.DataBase import DataBase
+#
+#
+# class ControladorSeccionEmpleado:
+#     def __init__(self):
+#         self.__base = DataBase()
+#         self.__window = SeccionEmpleadoVista()
+#
+#         self.__window.tabla_datos.actualizar_tabla(self.obtener_datos())
+#
+#         self.__window.get_boton_modificar_empleado().clicked.connect(self.mostrar_ventana_modificar_empleado)
+#         self.__window.get_input_busqueda().editingFinished.connect(self.buscar_empleado)
+#         self.__window.get_input_busqueda().textChanged.connect(self.buscar_empleado)
+#
+#     @property
+#     def window(self):
+#         return self.__window
+#
+#     def mostrar_ventana_modificar_empleado(self):
+#         self.dialogo_eliminar = QDialog()
+#         self.dialogo_eliminar.setWindowTitle("Modificar empleado")
+#
+#         layout = QVBoxLayout()
+#
+#         dni_label = QLabel("DNI del empleado a modificar:")
+#         self.dni_input = QLineEdit()
+#         self.eliminar_button = QPushButton("Modificar")
+#         layout.addWidget(dni_label)
+#         layout.addWidget(self.dni_input)
+#         layout.addWidget(self.eliminar_button)
+#
+#         self.dialogo_eliminar.setLayout(layout)
+#         self.dialogo_eliminar.exec()
+#
+#     def obtener_datos(self):
+#         datos = self.__base.getAll(
+#             "SELECT tipo_usuario, dni_usuario, nombre_usuario, alias_usuario FROM public.usuario"
+#         )
+#         print((datos))
+#         return datos
+#
+#     def buscar_empleado(self):
+#         datos = self.__base.getAll(
+#             "SELECT tipo_usuario, dni_usuario, nombre_usuario, alias_usuario FROM public.usuario WHERE nombre_empleado = '{}'".format(
+#                 self.__window.obtener_empleado_buscado()
+#             )
+#         )
+#         print((datos))
+#         return datos
+

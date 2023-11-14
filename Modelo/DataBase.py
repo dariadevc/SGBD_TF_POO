@@ -1,4 +1,5 @@
 import psycopg2
+from passw import clave
 
 
 class DataBaseMeta(type):
@@ -19,7 +20,7 @@ class DataBase(metaclass=DataBaseMeta):
                 port="5432",
                 database="BestFriends_DB",
                 user="postgres",
-                password="postgres",
+                password=clave,
             )
             print("¡Conexion exitosa!")
         except (Exception, psycopg2.DatabaseError) as error:
@@ -31,6 +32,7 @@ class DataBase(metaclass=DataBaseMeta):
         return cursor.fetchall()
 
     def get(self, query):
+        print("llega")
         cursor = self.conexion.cursor()
         cursor.execute(query)
         return cursor.fetchone()

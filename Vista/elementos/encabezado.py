@@ -46,14 +46,16 @@ class EncabezadoVista (QVBoxLayout): #encabezado común para todas las vistas de
 
         #barra_nav | botones
         # boton_seccion_empleado = BotonNavegador("Empleados", "Vista/Media/icon-empleado.png")
+        self.boton_seccion_informes = BotonNavegador("Informes", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/informe-icon.png")
         self.boton_seccion_animales = BotonNavegador("Animales", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/icon-animales.png")
-        self.boton_seccion_adopcion = BotonNavegador("Adopciones", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/icon-adopciones-2.png")
+        self.boton_seccion_empleado = BotonNavegador("Empleados", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/icon-empleado.png")
         self.boton_seccion_adoptantes = BotonNavegador("Adoptantes", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/icon-adoptantes.png")
         self.boton_seccion_visitas = BotonNavegador("Visitas", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/icon-citas.png")
         self.boton_seccion_visitantes = BotonNavegador("Visitantes", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/icon-visitantes.png")
+        self.boton_seccion_adopciones = BotonNavegador("Adopciones", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/icon-adopciones.png")
 
         #barra_nav - composición
-        self.componer_layout(barra_nav_layout, [self.boton_seccion_animales, self.boton_seccion_adopcion, self.boton_seccion_adoptantes, self.boton_seccion_visitas, self.boton_seccion_visitantes])
+        self.componer_layout(barra_nav_layout, [self.boton_seccion_informes, self.boton_seccion_empleado, self.boton_seccion_animales, self.boton_seccion_animales, self.boton_seccion_adoptantes, self.boton_seccion_visitas, self.boton_seccion_visitantes])
 
         #barra_nav - color fondo
         barra_nav_widget = QWidget()
@@ -67,8 +69,8 @@ class EncabezadoVista (QVBoxLayout): #encabezado común para todas las vistas de
         for w in widgets:
             layout.addWidget(w)
 
-    def get_boton_adopcion (self):
-        return self.boton_seccion_adopcion
+    def get_boton_empleado (self):
+        return self.boton_seccion_empleado
     
     def get_boton_animales(self):
         return self.boton_seccion_animales

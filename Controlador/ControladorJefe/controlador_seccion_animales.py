@@ -6,12 +6,11 @@ from Modelo.DataBase import DataBase
 class ControladorSeccionAnimales:
     def __init__(self):
         self.__base = DataBase()
-        # self.obtener_animales()
         self.__window = SeccionAnimalesVista()
+
         self.__window.tabla_datos.actualizar_tabla(self.obtener_datos())
-        self.__window.get_boton_modif_empleado().clicked.connect(
-            self.mostrar_ventana_modificar_animal
-        )
+
+        self.__window.get_boton_modificar_animal().clicked.connect(self.mostrar_ventana_modificar_animal)
         self.__window.get_input_busqueda().editingFinished.connect(self.buscar_animal)
         self.__window.get_input_busqueda().textChanged.connect(self.buscar_animal)
 
@@ -37,7 +36,7 @@ class ControladorSeccionAnimales:
 
     def obtener_datos(self):
         datos = self.__base.getAll(
-            "SELECT tipo_animal, nombre_animal, sexo_animal, etapa_vida_animal FROM public.animal"
+            "SELECT codigo_animal, tipo_animal, nombre_animal, sexo_animal, etapa_vida_animal, edad_estimada_animal || ' meses', peso_animal || ' kg', tamaño_animal FROM public.animal"
         )
         print((datos))
         return datos

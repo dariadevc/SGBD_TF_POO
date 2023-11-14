@@ -1,23 +1,16 @@
 from __future__ import annotations
-from PyQt6.QtWidgets import (
-    QMainWindow,
-    QApplication,
-    QWidget,
-    QVBoxLayout,
-    QLabel,
-    QPushButton,
-    QStackedWidget,
-)
-from Controlador.ControladorJefe.controlador_seccion_animales import (
-    ControladorSeccionAnimales,
-)
+from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QVBoxLayout, QLabel, QPushButton, QStackedWidget
+from PyQt6.QtGui import QIcon
+from Controlador.ControladorJefe.controlador_seccion_animales import ControladorSeccionAnimales
+from Controlador.ControladorJefe.controlador_seccion_empleado import ControladorSeccionEmpleado
 from Vista.elementos.encabezado import EncabezadoVista
 
 
 class ControladorGeneral:
-    def __init__(self, estilo) -> None:
+    def __init__(self) -> None:
         self.__window = QMainWindow()
         self.__window.setWindowTitle("BestFriends")
+        self.__window.setWindowIcon(QIcon('C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Media/logo-bsf.png'))
         self.__window.setGeometry(100, 100, 800, 600)
 
         self.vista_actual = QStackedWidget()
@@ -26,28 +19,23 @@ class ControladorGeneral:
 
         # Crear vistas
         self.vistaAnimal = ControladorSeccionAnimales()
-        self.vistaAdopciones = Vista1("Vista Adopciones")
+        # self.vistaEmpleado = Vista1("AAAAAAAAA")
+        self.vistaEmpleado = ControladorSeccionEmpleado()
 
         # Agregar vistas al QStackedWidget
         self.vista_actual.addWidget(self.vistaAnimal.window)
-        self.vista_actual.addWidget(self.vistaAdopciones)
+        self.vista_actual.addWidget(self.vistaEmpleado.window)
 
         self.boton_actual = None
 
-        self.encabezado.get_boton_adopcion().clicked.connect(
-            self.mostrar_vista_adopciones
-        )
-        self.encabezado.get_boton_adopcion().clicked.connect(
-            lambda: self.resaltar_boton(self.encabezado.get_boton_adopcion())
-        )
+        self.encabezado.get_boton_empleado().clicked.connect(self.mostrar_vista_empleado)
+        self.encabezado.get_boton_empleado().clicked.connect(lambda: self.resaltar_boton(self.encabezado.get_boton_empleado()))
 
         self.encabezado.get_boton_animales().clicked.connect(self.mostrar_vista_animal)
-        self.encabezado.get_boton_animales().clicked.connect(
-            lambda: self.resaltar_boton(self.encabezado.get_boton_animales())
-        )
+        self.encabezado.get_boton_animales().clicked.connect(lambda: self.resaltar_boton(self.encabezado.get_boton_animales()))
 
         boton_actualizar = QPushButton("Actualizar Vista")
-        boton_actualizar.clicked.connect(self.actualizar_vista)
+        boton_actualizar.clicked.connect(self.actualizar_vista_animal)
 
         layout = QVBoxLayout()
         layout.addLayout(self.encabezado)
@@ -59,20 +47,20 @@ class ControladorGeneral:
 
         self.__window.setCentralWidget(widget)
 
-        with open(estilo) as f:
-            self.__window.setStyleSheet(f.read())
+        # with open(estilo) as f:
+        #     self.__window.setStyleSheet(f.read())
 
-    def actualizar_vista(self):
-        # solo funciona para una vista, debería poder usar .currentWidget() para obtener los
-        # datos de la vista que se está mostrando
-        self.vista_actual.currentWidget()
-
+    def actualizar_vista_animal(self):
         nuevos_datos = self.vistaAnimal.obtener_datos()
-        nuevos_datos = self.vista_actual.currentWidget()
         self.vistaAnimal.window.tabla_datos.actualizar_tabla(nuevos_datos)
 
-    def mostrar_vista_adopciones(self):
-        self.vista_actual.setCurrentWidget(self.vistaAdopciones)
+
+    def actualizar_vista_empleado(self):
+        nuevos_datos = self.vistaEmpleado.obtener_datos()
+        self.vistaEmpleado.window.tabla_datos.actualizar_tabla(nuevos_datos)
+
+    def mostrar_vista_empleado(self):
+        self.vista_actual.setCurrentWidget(self.vistaEmpleado.window)
 
     def mostrar_vista_animal(self):
         self.vista_actual.setCurrentWidget(self.vistaAnimal.window)
@@ -103,10 +91,10 @@ class Vista1(QWidget):
         self.setLayout(layout)
 
 
-# if __name__ == "__main__":
-#     app = QApplication([])
-#     with open(estilo) as f:
-#         app.setStyleSheet(f.read())
-#     ventana = ControladorGeneral()
-#     ventana.window.show()
-#     app.exec()
+if __name__ == "__main__":
+    app = QApplication([])
+    with open("C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/vista_secciones/estilo_main.qss") as f:
+        app.setStyleSheet(f.read())
+    ventana = ControladorGeneral()
+    ventana.window.show()
+    app.exec()

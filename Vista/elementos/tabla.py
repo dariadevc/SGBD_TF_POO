@@ -4,6 +4,9 @@ from PyQt6.QtCore import Qt
 
 
 class Tabla(QTableWidget):
+    def __init__(self):
+        super().__init__()
+        self.encabezado_tabla = []
     def actualizar_tabla(self, nuevos_datos):
         self.setRowCount(0)  # vacia las filas de la tabla
         self.setColumnCount(0)
@@ -14,6 +17,9 @@ class Tabla(QTableWidget):
         self.setRowCount(len(nuevos_datos))
         self.setColumnCount(len(nuevos_datos[0]))
         self.verticalHeader().setVisible(False)
+
+        for c in range(len(nuevos_datos)):
+            self.horizontalHeader().setSectionResizeMode(c, QHeaderView.ResizeMode.Stretch)
 
         for fila_idx, fila_info in enumerate(nuevos_datos):
             for columna_idx, columna_info in enumerate(fila_info):

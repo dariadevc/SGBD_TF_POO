@@ -5,5 +5,5 @@ import sys
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    controlador = ControladorLogin("Vista\VistaLogin\estilo_login.qss")
+    controlador = ControladorLogin("C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/VistaLogin/estilo_login.qss")
     app.exec()
