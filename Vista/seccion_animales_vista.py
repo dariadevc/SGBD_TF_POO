@@ -72,7 +72,7 @@ class SeccionAnimalesVista(QWidget):
         return self.agregar_animal
 
     def get_boton_eliminar_animal(self):
-        return self.get_boton_eliminar_animal
+        return self.eliminar_animal
 
     def get_input_busqueda(self):
         return self.barra_busqueda.input_busqueda

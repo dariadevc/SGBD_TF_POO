@@ -12,11 +12,10 @@ class ControladorSeccionAnimales:
 
         self.__window.tabla_datos.actualizar_tabla(self.obtener_datos())
 
-        self.__window.get_boton_modificar_animal().clicked.connect(self.mostrar_ventana_modificar_animal)
+        self.__window.get_boton_eliminar_animal().clicked.connect(self.eliminar_elemento)
         self.__window.get_boton_agregar_animal().clicked.connect(self.mostrar_ventana_agregar_animal)
         self.__window.get_input_busqueda().editingFinished.connect(self.buscar_animal)
         self.__window.get_input_busqueda().textChanged.connect(self.buscar_animal)
-        self.__window.get_boton_eliminar_animal().clicked.connect(self.mostrar_eliminar_animal)
 
     @property
     def window(self) -> SeccionAnimalesVista:
@@ -37,6 +36,33 @@ class ControladorSeccionAnimales:
 
         self.dialogo_eliminar.setLayout(layout)
         self.dialogo_eliminar.exec()
+
+    def eliminar_elemento(self):
+        elemento_seleccionado = self.window.tabla_datos.info_tabla.selectedItems()
+        if not elemento_seleccionado:
+            QMessageBox.warning(self.window, "Advertencia", "No ha seleccionado un elemento para eliminar. \n Para eliminar seleccione un elemento de la tabla")
+            return
+        fila_seleccionada = elemento_seleccionado[0].row()
+        id_selec = self.window.tabla_datos.info_tabla.item(fila_seleccionada, 0).text()
+        elemento = self.__base.getAll("SELECT codigo_animal, nombre_animal FROM public.animal WHERE codigo_animal = '{}'".format(id_selec))
+        confirma = f"¿Está seguro de que desea eliminar a {elemento[0][1]}?"
+        reply = QMessageBox.question(self.window,'Confirmar eliminación', confirma, QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No, QMessageBox.StandardButton.No)
+
+        if reply == QMessageBox.StandardButton.Yes:
+            try:
+                self.baja_logica_animal(elemento[0][0])
+                QMessageBox.information(self.window, "Eliminado", "Ha sido eliminada correctamente. \n Actualice la tabla para ver los cambios reflejados")
+            except Exception as e:
+                print("no se pudo rip")
+
+        else:
+            QMessageBox.information(self.window, "Cancelado", "La eliminación ha sido cancelada.")
+
+
+    def baja_logica_animal(self,id_animal):
+        consulta = "UPDATE public.animal SET animal_eliminado = TRUE WHERE codigo_animal = '{}'".format(id_animal)
+        self.__base.query(consulta)
+        print("se cambió!")
 
     def mostrar_ventana_agregar_animal(self):
         dialogo_agregar = QDialog()
@@ -165,7 +191,7 @@ class ControladorSeccionAnimales:
 
     def obtener_datos(self):
         datos = self.__base.getAll(
-            "SELECT codigo_animal, tipo_animal, nombre_animal, sexo_animal, etapa_vida_animal, edad_estimada_animal || ' meses', peso_animal || ' kg', tamaño_animal FROM public.animal"
+            "SELECT codigo_animal, tipo_animal, nombre_animal, sexo_animal, etapa_vida_animal, edad_estimada_animal || ' meses', peso_animal || ' kg', tamaño_animal FROM public.animal WHERE animal_eliminado = FALSE"
         )
         print((datos))
         return datos
