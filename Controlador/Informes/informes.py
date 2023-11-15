@@ -25,9 +25,11 @@ class Informe(Pdf):
             print(f"Carpeta Informes y PDF {self.__nombre_informe} generados.")
 
         # self.__pdf = canvas.Canvas(nombre_path, pagesize=(595.27, 841.89))  # A4 pagesize
-        return canvas.Canvas(
-            nombre_path, pagesize=(self.__ancho, self.__alto)
-        )  # A4 pagesize
+        # return canvas.Canvas(
+        #     nombre_path, pagesize=(self.__ancho, self.__alto)
+        # )  # A4 pagesize
+
+        return canvas.Canvas(nombre_path, pagesize=(595.27, 841.89))  # A4 pagesize
 
     def guarda_pdf(self, pdf):
         pdf.save()
