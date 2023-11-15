@@ -1,6 +1,5 @@
 from PyQt6.QtWidgets import QVBoxLayout, QLabel, QMessageBox, QDateEdit, QPushButton, QLineEdit, QDialog, QGridLayout, QComboBox, QCheckBox
 from PyQt6.QtCore import QDate
-from PyQt6.QtGui import QAction
 from Vista.seccion_animales_vista import SeccionAnimalesVista
 from Modelo.database import DataBase
 
@@ -14,6 +13,7 @@ class ControladorSeccionAnimales:
 
         self.__window.get_boton_eliminar_animal().clicked.connect(self.eliminar_elemento)
         self.__window.get_boton_agregar_animal().clicked.connect(self.mostrar_ventana_agregar_animal)
+        self.__window.get_boton_modificar_animal().clicked.connect(self.mostrar_modificar_animal)
         self.__window.get_input_busqueda().editingFinished.connect(self.buscar_animal)
         self.__window.get_input_busqueda().textChanged.connect(self.buscar_animal)
 
@@ -145,7 +145,6 @@ class ControladorSeccionAnimales:
         dialogo_agregar.setLayout(layout)
         dialogo_agregar.exec()
 
-#hay que agregar el def eliminar
 
     def guardar_datos(self):
         #validaciones
@@ -188,6 +187,103 @@ class ControladorSeccionAnimales:
             print("Error al guardar los datos")
             QMessageBox.information(self.window, "Error", "Error al guardar los datos")
 
+    def mostrar_modificar_animal(self):
+        elemento_seleccionado = self.window.tabla_datos.info_tabla.selectedItems()
+        if not elemento_seleccionado:
+            QMessageBox.warning(self.window, "Advertencia",
+                                "No ha seleccionado un elemento. \n Para modificar seleccione un elemento de la tabla")
+            return
+        fila_seleccionada = elemento_seleccionado[0].row()
+        id_selec = self.window.tabla_datos.info_tabla.item(fila_seleccionada, 0).text()
+        elemento = self.__base.getAll("SELECT codigo_animal, nombre_animal, tipo_animal, sexo_animal, etapa_vida_animal, edad_estimada_animal, peso_animal, tamaño_animal, descripcion_animal, animal_castrado, fecha_nacimiento_estimada_animal, ingreso_refugio_animal, causa_baja_animal FROM public.animal WHERE codigo_animal = '{}'".format(id_selec))
+        print(elemento)
+
+        dialogo_agregar = QDialog()
+        dialogo_agregar.setWindowTitle("Modificar")
+        dialogo_agregar.setGeometry(100, 100, 700, 400)
+
+        nombre_animal_label = QLabel("Nombre:")
+        self.nombre_animal_input2 = QLineEdit()
+        self.nombre_animal_input2.setText(elemento[0][1])
+
+        label_tipo = QLabel("Tipo")
+        self.combo_tipo2 = QComboBox()
+        self.combo_tipo2.addItems(["PERRO", "GATO"])
+        self.combo_tipo2.setCurrentIndex(self.combo_tipo2.findText(elemento[0][2]))
+
+        label_sexo = QLabel("Sexo")
+        self.combo_sexo2 = QComboBox()
+        self.combo_sexo2.addItems(["HEMBRA", "MACHO"])
+        self.combo_sexo2.setCurrentIndex(self.combo_sexo2.findText(elemento[0][3]))
+
+        label_etapa = QLabel("Etapa de vida del animal ")
+        self.combo_etapa2 = QComboBox()
+        self.combo_etapa2.addItems(["CACHORRO", "ADULTO"])
+        self.combo_etapa2.setCurrentIndex(self.combo_etapa2.findText(elemento[0][4]))
+
+        edad_animal_label = QLabel("Edad:")
+        self.edad_animal_input2 = QLineEdit()
+        self.edad_animal_input2.setText(str(elemento[0][5]))
+
+        peso_animal_label = QLabel("Peso:")
+        self.peso_animal_input2 = QLineEdit()
+        self.peso_animal_input2.setText(str(float(elemento[0][6])))
+
+        label_tamanio = QLabel("Tamaño")
+        self.combo_tamanio2 = QComboBox()
+        self.combo_tamanio2.addItems(["PEQUEÑO", "GRANDE", "MEDIANO"])
+        self.combo_tamanio2.setCurrentIndex(self.combo_tamanio2.findText(elemento[0][7]))
+
+        descripcion_animal_label = QLabel("Breve descripción (Limite: 20 caracteres)")
+        self.desc_animal_input2 = QLineEdit()
+        self.desc_animal_input2.setText(elemento[0][8])
+
+        check_castrado_label = QLabel("¿Está castrado?")
+        self.check_castrado2 = QCheckBox()
+        self.check_castrado2.setChecked(elemento[0][9])
+
+        fecha_nac_animal_label = QLabel("Fecha de nacimiento")
+        self.fecha_nac_input2 = QDateEdit()
+        self.fecha_nac_input2.setCalendarPopup(True)
+        self.fecha_nac_input2.setMinimumDate(self.fecha_nac_input2.minimumDate())
+        self.fecha_nac_input2.setDate(QDate(elemento[0][10].year, elemento[0][10].month, elemento[0][10].day))
+
+        fecha_ing_animal_label = QLabel("Fecha de ingreso al refugio")
+        self.fecha_ing_input2 = QDateEdit()
+        self.fecha_ing_input2.setCalendarPopup(True)
+        self.fecha_ing_input2.setMinimumDate(self.fecha_ing_input2.minimumDate())
+        self.fecha_ing_input2.setDate(QDate(elemento[0][11].year, elemento[0][11].month, elemento[0][11].day))
+
+        boton_guardar = QPushButton("Guardar datos")
+        # boton_guardar.clicked.connect()
+
+        layout = QGridLayout()
+        layout.addWidget(nombre_animal_label, 0, 0)
+        layout.addWidget(self.nombre_animal_input2, 0, 1)
+        layout.addWidget(label_tipo, 1, 0)
+        layout.addWidget(self.combo_tipo2, 1, 1)
+        layout.addWidget(label_sexo, 2, 0)
+        layout.addWidget(self.combo_sexo2, 2, 1)
+        layout.addWidget(label_etapa, 3, 0)
+        layout.addWidget(self.combo_etapa2, 3, 1)
+        layout.addWidget(edad_animal_label, 4, 0)
+        layout.addWidget(self.edad_animal_input2, 4, 1)
+        layout.addWidget(peso_animal_label, 5, 0)
+        layout.addWidget(self.peso_animal_input2, 5, 1)
+        layout.addWidget(label_tamanio, 6, 0)
+        layout.addWidget(self.combo_tamanio2, 6, 1)
+        layout.addWidget(descripcion_animal_label, 7, 0)
+        layout.addWidget(self.desc_animal_input2, 7, 1)
+        layout.addWidget(fecha_nac_animal_label, 8, 0)
+        layout.addWidget(self.fecha_nac_input2, 8, 1)
+        layout.addWidget(fecha_ing_animal_label, 9, 0)
+        layout.addWidget(self.fecha_ing_input2, 9, 1)
+        layout.addWidget(check_castrado_label,10,0)
+        layout.addWidget(self.check_castrado2, 10,1)
+        layout.addWidget(boton_guardar, 11, 0, 1, 2)
+
+        dialogo_agregar.setLayout(layout)
+        dialogo_agregar.exec()
 
     def obtener_datos(self):
         datos = self.__base.getAll(
@@ -198,7 +294,7 @@ class ControladorSeccionAnimales:
 
     def buscar_animal(self):
         datos = self.__base.getAll(
-            "SELECT tipo_animal, nombre_animal, sexo_animal, etapa_vida_animal FROM public.animal WHERE tipo_animal = '{}'".format(
+            "SELECT tipo_animal, nombre_animal, sexo_animal, etapa_vida_animal FROM public.animal WHERE tipo_animal ILIKE '%{}%'".format(
                 self.__window.obtener_animal_buscado()
             )
         )

@@ -17,27 +17,13 @@ class ControladorLogin:
     def window (self):
         return self.__window
 
-    # def login(self):
-    #     usuario = Usuario(self.__window.get_usuario(), self.__window.get_contrasenia())
-    #     usuario.login()
-    #     if usuario.login():
-    #         self.__window.hide()
-    #         interfaz_general = ControladorGeneral()
-    #         interfaz_general.window.show()
-    #     else:
-    #         mensaje = QMessageBox()
-    #         mensaje.show()
-    #         mensaje.setIcon(QMessageBox.Icon.Information)
-    #         mensaje.setWindowTitle("Error")
-    #         mensaje.setText("Credenciales erroneas.")
-    #         mensaje.exec()
 
     def login (self):
         usuario = Usuario(self.__window.get_usuario(), self.__window.get_contrasenia())
-        user = usuario.login()
-        if user:
+        self.user = usuario.login()
+        if self.user:
             self.__window.hide()
-            self.__correcto = ControladorGeneral()
+            self.__correcto = ControladorGeneral(self.user)
         else:
             # dialogo_ingreso_incorrecto = QDialog()
             # dialogo_ingreso_incorrecto.setWindowTitle("Error")

@@ -1,18 +1,20 @@
-
-from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QPushButton, QStackedWidget
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QPushButton, QStackedWidget, QHBoxLayout, QLabel
 from Controlador.ControladorAnimales import ControladorSeccionAnimales
 from Controlador.ControladorEmpleados import ControladorSeccionEmpleado
 from Vista.Elementos.Encabezado import EncabezadoVista
 from Controlador.ControladorAdopciones import ControladorSeccionAdopciones
+from Modelo.database import DataBase
 
 
 class ControladorGeneral:
-    def __init__(self) -> None:
+    def __init__(self, user) -> None:
         self.__window = QMainWindow()
         self.__window.setWindowTitle("BestFriends")
         self.__window.setGeometry(100, 100, 800, 600)
         with open("C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Estilos/estilo_general.qss") as f:
             self.__window.setStyleSheet(f.read())
+        self.__usuario = user
 
 
         self.vista_actual = QStackedWidget()
@@ -22,11 +24,14 @@ class ControladorGeneral:
         self.vistaAnimal = ControladorSeccionAnimales()
         self.vistaEmpleado = ControladorSeccionEmpleado()
         self.vistaAdopcion = ControladorSeccionAdopciones()
+        self.vistaBienvenida = VistaBienvenida(self.__usuario[4])
 
         # Agregar vistas al QStackedWidget
+        self.vista_actual.addWidget(self.vistaBienvenida)
         self.vista_actual.addWidget(self.vistaAnimal.window)
         self.vista_actual.addWidget(self.vistaEmpleado.window)
         self.vista_actual.addWidget(self.vistaAdopcion.window)
+
 
         self.boton_actual = None
 
@@ -85,6 +90,22 @@ class ControladorGeneral:
         # Aplicar un estilo para resaltarlo
         boton.setStyleSheet("background-color: #e655c4;")
 
+
+class VistaBienvenida(QWidget):
+    def __init__(self, nombre):
+        super().__init__()
+        self.nombre = nombre
+        layout = QVBoxLayout()
+        self.label = QLabel()
+        fuente = self.label.font()
+        fuente.setPointSize(50)
+        self.label.setFont(fuente)
+        layout.addWidget(self.label)
+        layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.setLayout(layout)
+        self.seteaLabel()
+    def seteaLabel (self):
+        self.label.setText(f"BIENVENID@ {self.nombre}")
 
     @property
     def window(self):
