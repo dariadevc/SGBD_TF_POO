@@ -8,7 +8,9 @@ from PyQt6.QtWidgets import (
     QStackedWidget,
     QLabel,
     QLineEdit,
-    QApplication, QTableWidget, QTableWidgetItem,
+    QApplication,
+    QTableWidget,
+    QTableWidgetItem,
 )
 from PyQt6.QtCore import Qt
 import sys
@@ -17,29 +19,33 @@ from Vista.Elementos.Tabla import Tabla
 
 
 class FormularioAdopcionVista(QWidget):
-    def __init__(self, parent_window):
+    def __init__(self):
         super().__init__()
-
-        self.parent_window = parent_window
 
         layout = QVBoxLayout()
 
-        self.dni_label = QLabel("Adoptante (DNI):")
-        self.dni_input = QLineEdit()
+        self.__dni_label = QLabel("Adoptante (DNI):")
+        self.__dni_input = QLineEdit()
 
-        self.animal_label = QLabel("Animal (Código):")
-        self.animal_input = QLineEdit()
+        self.__animal_label = QLabel("Animal (Código):")
+        self.__animal_input = QLineEdit()
 
-        self.submit_button = QPushButton("Enviar Solicitud")
+        self.__boton_enviar = QPushButton("Enviar Solicitud")
         # self.submit_button.clicked.connect(self.submit_form)
 
-        layout.addWidget(self.dni_label)
-        layout.addWidget(self.dni_input)
-        layout.addWidget(self.animal_label)
-        layout.addWidget(self.animal_input)
-        layout.addWidget(self.submit_button)
+        layout.addWidget(self.__dni_label)
+        layout.addWidget(self.__dni_input)
+        layout.addWidget(self.__animal_label)
+        layout.addWidget(self.__animal_input)
+        layout.addWidget(self.__boton_enviar)
 
         self.setLayout(layout)
+
+    def get_dni_adoptante(self):
+        return self.__dni_input
+
+    def get_cod_animal(self):
+        return self.__animal_input
 
     def nuevo_adoptante(self):
         super().__init__()
@@ -145,7 +151,6 @@ class AdopcionesAntiguasVista(QWidget):
 
         self.tabla_datos = Tabla()
 
-
         # acciones_tabla_layout - composición
         acciones_usuario_layout.addWidget(acciones_botones_widget)
         acciones_usuario_layout.addWidget(self.tabla_datos.info_tabla)
@@ -192,8 +197,6 @@ class SeccionAdopcionVista(QWidget):
         self.boton_adopciones_antiguas = QPushButton("Acceder a \nAdopciones Antiguas")
         self.boton_genera_adopcion = QPushButton("Generar \nNueva Adopción")
 
-
-
         layout.addWidget(self.boton_adopciones_antiguas)
         layout.addWidget(self.boton_genera_adopcion)
 
@@ -201,12 +204,10 @@ class SeccionAdopcionVista(QWidget):
 
         self.central_widget.addWidget(self.button_widget)
 
-
     def mostrar_formulario_adopcion(self):
-        formulario_adopcion = FormularioAdopcionVista(self)
+        formulario_adopcion = FormularioAdopcionVista()
         self.central_widget.addWidget(formulario_adopcion)
         self.central_widget.setCurrentWidget(formulario_adopcion)
-
 
     def get_boton_adopciones_antiguas(self):
         return self.boton_adopciones_antiguas
