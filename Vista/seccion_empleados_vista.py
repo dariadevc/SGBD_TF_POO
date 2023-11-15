@@ -3,14 +3,9 @@ from PyQt6.QtWidgets import (
     QMessageBox,
     QWidget,
     QVBoxLayout,
-    QHBoxLayout,
-    QPushButton,
-    QTableWidget,
-    QTableWidgetItem,
-    QLineEdit,
-    QHeaderView,
+    QHBoxLayout
 )
-from PyQt6.QtCore import Qt
+
 from Vista.Elementos.Boton import BotonAccionTabla
 from Vista.Elementos.Tabla import Tabla
 from Vista.Elementos.Barra_Busqueda import BarraBusqueda
@@ -30,9 +25,9 @@ class SeccionEmpleadoVista(QWidget):
         acciones_botones_layout = QVBoxLayout()
 
         # acciones_botones_layout | botones
-        self.agregar_empleado = BotonAccionTabla("   Agregar\n   empleado", "Vista/Media/add-animal.png")
-        self.modificar_empleado = BotonAccionTabla(" Modificar\n empleado", "Vista/Media/edit-animal.png")
-        self.eliminar_empleado = BotonAccionTabla("  Eliminar\n  empleado", "Vista/Media/subtract-animal.png")
+        self.agregar_empleado = BotonAccionTabla("   Agregar\n   empleado", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Media/add-animal.png")
+        self.modificar_empleado = BotonAccionTabla(" Modificar\n empleado", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Media/edit-animal.png")
+        self.eliminar_empleado = BotonAccionTabla("  Eliminar\n  empleado", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Media/subtract-animal.png")
 
         # acciones_tabla_layout - composición
         self.componer_layout(

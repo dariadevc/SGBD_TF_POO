@@ -3,6 +3,7 @@ from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QPushButton, QSta
 from Controlador.ControladorAnimales import ControladorSeccionAnimales
 from Controlador.ControladorEmpleados import ControladorSeccionEmpleado
 from Vista.Elementos.Encabezado import EncabezadoVista
+from Controlador.ControladorAdopciones import ControladorSeccionAdopciones
 
 
 class ControladorGeneral:
@@ -10,26 +11,22 @@ class ControladorGeneral:
         self.__window = QMainWindow()
         self.__window.setWindowTitle("BestFriends")
         self.__window.setGeometry(100, 100, 800, 600)
+        with open("C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Vista/Estilos/estilo_general.qss") as f:
+            self.__window.setStyleSheet(f.read())
 
-        # boton = QPushButton("entraste!!!")
-        # layout = QVBoxLayout()
-        # layout.addWidget(boton)
-        # widget = QWidget()
-        # widget.setLayout(layout)
-        # self.__window.setCentralWidget(widget)
-        self.__window.show()
 
         self.vista_actual = QStackedWidget()
-
         self.encabezado = EncabezadoVista()
 
         # Crear vistas
         self.vistaAnimal = ControladorSeccionAnimales()
         self.vistaEmpleado = ControladorSeccionEmpleado()
+        self.vistaAdopcion = ControladorSeccionAdopciones()
 
         # Agregar vistas al QStackedWidget
         self.vista_actual.addWidget(self.vistaAnimal.window)
         self.vista_actual.addWidget(self.vistaEmpleado.window)
+        self.vista_actual.addWidget(self.vistaAdopcion.window)
 
         self.boton_actual = None
 
@@ -38,6 +35,9 @@ class ControladorGeneral:
 
         self.encabezado.get_boton_animales().clicked.connect(self.mostrar_vista_animal)
         self.encabezado.get_boton_animales().clicked.connect(lambda: self.resaltar_boton(self.encabezado.get_boton_animales()))
+
+        self.encabezado.get_boton_adopciones().clicked.connect(self.mostrar_vista_adopcion)
+        self.encabezado.get_boton_adopciones().clicked.connect(lambda: self.resaltar_boton(self.encabezado.get_boton_adopciones()))
 
         boton_actualizar = QPushButton("Actualizar Vista")
         boton_actualizar.clicked.connect(self.actualizar_vista_animal)
@@ -52,9 +52,6 @@ class ControladorGeneral:
 
         self.__window.setCentralWidget(widget)
         self.__window.show()
-
-        # with open(estilo) as f:
-        #     self.__window.setStyleSheet(f.read())
 
 
     def actualizar_vista_animal(self):
@@ -73,6 +70,10 @@ class ControladorGeneral:
 
     def mostrar_vista_animal(self):
         self.vista_actual.setCurrentWidget(self.vistaAnimal.window)
+
+    def mostrar_vista_adopcion(self):
+        self.vista_actual.setCurrentWidget(self.vistaAdopcion.window)
+        print("deberia mostrar adopciones")
 
 
     def resaltar_boton(self, boton):

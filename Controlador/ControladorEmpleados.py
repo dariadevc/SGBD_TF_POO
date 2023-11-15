@@ -10,7 +10,7 @@ from PyQt6.QtWidgets import (
     QPushButton,
 )
 from Vista.seccion_empleados_vista import SeccionEmpleadoVista
-from Modelo.DataBase import DataBase
+from Modelo.database import DataBase
 
 
 class ControladorSeccionEmpleado:

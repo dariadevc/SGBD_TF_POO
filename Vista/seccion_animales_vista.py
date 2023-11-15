@@ -30,9 +30,9 @@ class SeccionAnimalesVista(QWidget):
         acciones_botones_layout = QVBoxLayout()
 
         # acciones_botones_layout | botones
-        self.agregar_animal = BotonAccionTabla("   Agregar\n   animal", "Vista/Media/add-animal.png")
-        self.modificar_animal = BotonAccionTabla(" Modificar\n animal", "Vista/Media/edit-animal.png")
-        self.eliminar_animal = BotonAccionTabla("  Eliminar\n  animal", "Vista/Media/subtract-animal.png")
+        self.agregar_animal = BotonAccionTabla("   Agregar\n   animal", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Media/add-animal.png")
+        self.modificar_animal = BotonAccionTabla(" Modificar\n animal", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Media/edit-animal.png")
+        self.eliminar_animal = BotonAccionTabla("  Eliminar\n  animal", "C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Media/subtract-animal.png")
 
         # acciones_tabla_layout - composición
         self.componer_layout(
@@ -67,6 +67,12 @@ class SeccionAnimalesVista(QWidget):
 
     def get_boton_modificar_animal (self):
         return self.modificar_animal
+
+    def get_boton_agregar_animal(self):
+        return self.agregar_animal
+
+    def get_boton_eliminar_animal(self):
+        return self.get_boton_eliminar_animal
 
     def get_input_busqueda(self):
         return self.barra_busqueda.input_busqueda

@@ -1,4 +1,4 @@
-from Modelo.DataBase import DataBase
+from Modelo.database import DataBase
 
 
 class UsuarioDao:

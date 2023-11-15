@@ -12,16 +12,16 @@ class RepeatedBackgroundWidget(QWidget):
         super().__init__()
 
         # Cargar la imagen de fondo
-        # self.background_image = QPixmap("Vista\Media\shelter-icon.png")
-        # self.background_image = self.background_image.scaled(100, 100)
+        self.background_image = QPixmap("C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Media/shelter-icon.png")
+        self.background_image = self.background_image.scaled(100, 100)
 
     def paintEvent(self, event):
         painter = QPainter(self)
         background_color = QColor(236, 114, 11)
         painter.fillRect(self.rect(), background_color)
-        # for x in range(0, self.width(), self.background_image.width()):
-        #     for y in range(self.height(), self.background_image.height()):
-        #         painter.drawPixmap(x, y, self.background_image)
+        for x in range(0, self.width(), self.background_image.width()):
+            for y in range(0, self.height(), self.background_image.height()):
+                painter.drawPixmap(x, y, self.background_image)
 
 
 class Login(QMainWindow):
@@ -43,7 +43,7 @@ class Login(QMainWindow):
         interfaz_layout = QVBoxLayout()
         logo = QLabel()
         logo.setFixedSize(90, 70)
-        logo.setPixmap(QPixmap('Vista\Media\logo-bsf.png').scaled(logo.width(), logo.height()))
+        logo.setPixmap(QPixmap('C:/Users/Fiore/OneDrive/Escritorio/SGBD_TF_POO/Media/logo-bsf.png').scaled(logo.width(), logo.height()))
         logo.setObjectName("logo")
         interfaz_layout.addWidget(logo)
         interfaz_layout.addLayout(self.generar_formulario())
